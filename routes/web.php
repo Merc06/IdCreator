@@ -15,8 +15,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/home', function () {
-    return view('layout.home');
-});
+// Route::get('/dashboard', function () {
+//     return view('layout.home');
+// });
 
 Route::get('{path}', 'HomeController@index')->where( 'path', '[A-z]([0-9a-z_.]+)?' );
+
+Route::post('/createid', 'HomeController@store');

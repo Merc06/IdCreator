@@ -10,10 +10,6 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="css/app.css">
-    
-    <style>
-      
-    </style>
 </head>
 
 <body id="bodysidebar" class="hold-transition sidebar-mini">
@@ -68,14 +64,14 @@
                                 </p>
                             </router-link>
                         </li>
-                        <li class="nav-item">
+                        <!-- <li class="nav-item">
                             <router-link to="/createId" class="nav-link">
                                 <i class="nav-icon fas fa-user-circle"></i>
                                 <p>
                                     Create ID
                                 </p>
                             </router-link>
-                        </li>
+                        </li> -->
                         
                     </ul>
                 </nav>

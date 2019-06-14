@@ -19,7 +19,7 @@ Vue.use(VueRouter);
 
 let routes = [
     { path: '/dashboard', component: require('./components/Dashboard.vue').default },
-    { path: '/createId', component: require('./components/CreateId.vue').default },
+    // { path: '/createId', component: require('./components/CreateId.vue').default },
     { path: '*', component: require('./components/NotFound.vue').default }
 ]
 
@@ -55,7 +55,12 @@ const toast = Swal.mixin({
 
 window.toast = toast;
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+// Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+
+Vue.component(
+    'create-id',
+    require('./components/sub/CreateId.vue').default
+);
 
 
 const app = new Vue({

@@ -85,7 +85,7 @@
                 </div>
 
                 <div class="links">
-                    <a href="/home">Get Started !</a>
+                    <a href="/dashboard">Get Started !</a>
                 </div>
             </div>
         </div>
