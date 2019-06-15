@@ -21,10 +21,10 @@
                     <form @submit.prevent="createId()">
                         <div class="modal-body">
 
-                            <label>Type:</label>
                             <div class="row">
                                 <div class="col-md-12">
 
+                                    <label>Type:</label>
                                     <div class="form-group">
                                         <div class="form-check form-check-inline">
                                             <input class="form-check-input" name="type" v-model="form.type" type="radio" id="employee" value="employee">
@@ -332,6 +332,7 @@
                             type: 'success',
                             title: 'ID Created Successfully'
                         });
+                        // this.form.reset();
                         this.$Progress.finish();
                     })
                     .catch(() => {
