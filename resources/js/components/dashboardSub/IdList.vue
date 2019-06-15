@@ -28,12 +28,13 @@
                                         </div>
                                     </div>
                                 </th>
+                                <th>ID#</th>
                                 <th>Name</th>
                                 <th>Type</th>
                                 <th>Status</th>
                                 <th>Action</th>
                             </tr>
-                            <tr>
+                            <tr v-for="userId in ids.data" :key="userId.id">
                                 <td>
                                     <div class="form-group">
                                         <div class="form-check">
@@ -41,9 +42,10 @@
                                         </div>
                                     </div>
                                 </td>
-                                <td>John Doe</td>
-                                <td>11-7-2014</td>
-                                <td><span class="tag tag-success">Approved</span></td>
+                                <td>{{ userId.empid }}</td>
+                                <td>{{ userId.lastName }}, {{ userId.firstName }} {{ userId.mi }}.</td>
+                                <td>{{ userId.type }}</td>
+                                <td>{{ userId.status }}</td>
                                 <td>
                                     <div class="btn-group">
                                         <button type="button" class="btn btn-default btn-flat btn-sm">
@@ -104,7 +106,7 @@ export default {
 
     methods: {
         loadId() {
-            axios.get('/loadid').then((data) => {
+            axios.get('api/loadid').then((data) => {
                 this.ids = data;
                 console.log(data);
             });

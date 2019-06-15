@@ -32,10 +32,17 @@ class IdController extends Controller
         
         // GENERATE QRCODE
         QrCode::format('png')
-                ->generate($qr, 'img/qrcodes/'.$request->lastName.$request->bday.'.png');
+                ->generate($qr, 'img/qrcodes/'.$request->firstName.$request->lastName.$request->bday.'.png');
 
         // INSERT INTO DATABASE
         $id = new Id;
+        $lastid = $id::select('id')->latest()->first();
+        $num = 0;
+        if (!is_null($lastid)) {
+            $id->empid = date('Y').'-'.$lastid->id++;
+        } else {
+            $id->empid = date('Y').'-'.++$num;
+        }
         $id->type = $request->type;
         $id->lastName = $request->lastName;
         $id->firstName = $request->firstName;
@@ -67,7 +74,9 @@ class IdController extends Controller
         \Image::make($request->sign)->save(public_path('img/sign/') . $sign);
         $id->sign = $sign;
         // QR CODE
-        $id->qrcode = $request->lastName.$request->bday.'.png';
+        $id->qrcode = $request->firstName.$request->lastName.$request->bday.'.png';
+
+        // $id->status = 'Pending';
 
         $id->save();
 
@@ -79,6 +88,6 @@ class IdController extends Controller
     {
         $ids = Id::get();
 
-        return 'asdasdas';
+        return $ids;
     }
 }

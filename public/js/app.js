@@ -2359,6 +2359,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2392,7 +2394,7 @@ __webpack_require__.r(__webpack_exports__);
     loadId: function loadId() {
       var _this = this;
 
-      axios.get('/loadid').then(function (data) {
+      axios.get('api/loadid').then(function (data) {
         _this.ids = data;
         console.log(data);
       });
@@ -42795,122 +42797,155 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "row" }, [
+    _c("div", { staticClass: "col-12" }, [
+      _c("div", { staticClass: "card" }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-body table-responsive p-0" }, [
+          _c("table", { staticClass: "table table-bordered" }, [
+            _c(
+              "tbody",
+              [
+                _vm._m(1),
+                _vm._v(" "),
+                _vm._l(_vm.ids.data, function(userId) {
+                  return _c("tr", { key: userId.id }, [
+                    _vm._m(2, true),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(userId.empid))]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v(
+                        _vm._s(userId.lastName) +
+                          ", " +
+                          _vm._s(userId.firstName) +
+                          " " +
+                          _vm._s(userId.mi) +
+                          "."
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(userId.type))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(userId.status))]),
+                    _vm._v(" "),
+                    _vm._m(3, true)
+                  ])
+                })
+              ],
+              2
+            )
+          ])
+        ])
+      ])
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-12" }, [
-        _c("div", { staticClass: "card" }, [
-          _c("div", { staticClass: "card-header bg-primary" }, [
-            _c("h3", { staticClass: "card-title m-0" }, [_vm._v("ID List")]),
-            _vm._v(" "),
-            _c("div", { staticClass: "card-tools" }, [
-              _c(
-                "div",
-                {
-                  staticClass: "input-group input-group-sm",
-                  staticStyle: { width: "150px" }
-                },
-                [
-                  _c("select", { staticClass: "form-control" }, [
-                    _c("option", [_vm._v("Order by:")]),
-                    _vm._v(" "),
-                    _c("option", [_vm._v("Date Ascending")]),
-                    _vm._v(" "),
-                    _c("option", [_vm._v("Date Descending")]),
-                    _vm._v(" "),
-                    _c("option", [_vm._v("Name Alphabetical")])
-                  ])
-                ]
-              )
+    return _c("div", { staticClass: "card-header bg-primary" }, [
+      _c("h3", { staticClass: "card-title m-0" }, [_vm._v("ID List")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "card-tools" }, [
+        _c(
+          "div",
+          {
+            staticClass: "input-group input-group-sm",
+            staticStyle: { width: "150px" }
+          },
+          [
+            _c("select", { staticClass: "form-control" }, [
+              _c("option", [_vm._v("Order by:")]),
+              _vm._v(" "),
+              _c("option", [_vm._v("Date Ascending")]),
+              _vm._v(" "),
+              _c("option", [_vm._v("Date Descending")]),
+              _vm._v(" "),
+              _c("option", [_vm._v("Name Alphabetical")])
             ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "card-body table-responsive p-0" }, [
-            _c("table", { staticClass: "table table-bordered" }, [
-              _c("tbody", [
-                _c("tr", { staticClass: "bg-gray" }, [
-                  _c("th", [
-                    _c("div", { staticClass: "form-group" }, [
-                      _c("div", { staticClass: "form-check" }, [
-                        _c("input", {
-                          staticClass: "form-check-input",
-                          attrs: { type: "checkbox", value: "option1" }
-                        })
-                      ])
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("th", [_vm._v("Name")]),
-                  _vm._v(" "),
-                  _c("th", [_vm._v("Type")]),
-                  _vm._v(" "),
-                  _c("th", [_vm._v("Status")]),
-                  _vm._v(" "),
-                  _c("th", [_vm._v("Action")])
-                ]),
-                _vm._v(" "),
-                _c("tr", [
-                  _c("td", [
-                    _c("div", { staticClass: "form-group" }, [
-                      _c("div", { staticClass: "form-check" }, [
-                        _c("input", {
-                          staticClass: "form-check-input",
-                          attrs: { type: "checkbox", value: "option1" }
-                        })
-                      ])
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("John Doe")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("11-7-2014")]),
-                  _vm._v(" "),
-                  _c("td", [
-                    _c("span", { staticClass: "tag tag-success" }, [
-                      _vm._v("Approved")
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("td", [
-                    _c("div", { staticClass: "btn-group" }, [
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-default btn-flat btn-sm",
-                          attrs: { type: "button" }
-                        },
-                        [_c("i", { staticClass: "fas fa-eye" })]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-default btn-flat btn-sm",
-                          attrs: { type: "button" }
-                        },
-                        [_c("i", { staticClass: "fas fa-edit" })]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-default btn-flat btn-sm",
-                          attrs: { type: "button" }
-                        },
-                        [_c("i", { staticClass: "fas fa-trash" })]
-                      )
-                    ])
-                  ])
-                ])
-              ])
-            ])
+          ]
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tr", { staticClass: "bg-gray" }, [
+      _c("th", [
+        _c("div", { staticClass: "form-group" }, [
+          _c("div", { staticClass: "form-check" }, [
+            _c("input", {
+              staticClass: "form-check-input",
+              attrs: { type: "checkbox", value: "option1" }
+            })
           ])
         ])
+      ]),
+      _vm._v(" "),
+      _c("th", [_vm._v("ID#")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Name")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Type")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Status")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Action")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", [
+      _c("div", { staticClass: "form-group" }, [
+        _c("div", { staticClass: "form-check" }, [
+          _c("input", {
+            staticClass: "form-check-input",
+            attrs: { type: "checkbox", value: "option1" }
+          })
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", [
+      _c("div", { staticClass: "btn-group" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-default btn-flat btn-sm",
+            attrs: { type: "button" }
+          },
+          [_c("i", { staticClass: "fas fa-eye" })]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-default btn-flat btn-sm",
+            attrs: { type: "button" }
+          },
+          [_c("i", { staticClass: "fas fa-edit" })]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-default btn-flat btn-sm",
+            attrs: { type: "button" }
+          },
+          [_c("i", { staticClass: "fas fa-trash" })]
+        )
       ])
     ])
   }

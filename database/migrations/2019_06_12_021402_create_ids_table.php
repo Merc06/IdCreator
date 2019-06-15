@@ -15,6 +15,7 @@ class CreateIdsTable extends Migration
     {
         Schema::create('ids', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('empid');
             $table->string('type');
             $table->string('lastName');
             $table->string('firstName');
@@ -42,6 +43,7 @@ class CreateIdsTable extends Migration
             $table->string('sign');
             $table->string('qrcode');
 
+            $table->string('status')->default('Pending');
             $table->string('expiration');
             // $table->string('idno')->nullable();
             // $table->string('Last_Name');
