@@ -90,4 +90,27 @@ class IdController extends Controller
 
         return $ids;
     }
+
+
+    public function sortid(Request $request) 
+    {
+        if($request->q == 'asc') {
+            $ids = Id::oldest()->get();
+        } elseif($request->q == 'des') {
+            $ids = Id::latest()->get();
+        } else {
+            $ids = Id::orderBy('lastName', 'asc')->get();
+        }
+
+        return $ids;
+    }
+
+
+    public function printview(Request $request)
+    {
+        $selected = explode(',', $request->q);
+        $ids = Id::whereIn('id', $selected)->get();
+
+        return $ids;
+    }
 }

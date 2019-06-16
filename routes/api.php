@@ -18,3 +18,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('/loadid', 'IdController@loadid');
+Route::get('/sortid', 'IdController@sortid');
+Route::get('/printview', 'IdController@printview');
