@@ -21,4 +21,5 @@ Route::get('/', function () {
 
 Route::get('{path}', 'HomeController@index')->where( 'path', '[A-z]([0-9a-z_.]+)?' );
 
-Route::post('/createid', 'HomeController@store');
+Route::post('/createid', 'IdController@store');
+// Route::get('/loadid', 'IdController@loadid');

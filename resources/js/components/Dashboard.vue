@@ -8,7 +8,7 @@
                     </div>
                    
                     <div class="card-body">
-                        
+                        <id-list />
                     </div>
                     <!-- /.card-body -->
                 </div>
@@ -27,7 +27,6 @@
             }
         },
         methods: {
-
         }
     }
 </script>

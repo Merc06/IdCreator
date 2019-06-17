@@ -59,7 +59,12 @@ window.toast = toast;
 
 Vue.component(
     'create-id',
-    require('./components/sub/CreateId.vue').default
+    require('./components/dashboardSub/CreateId.vue').default
+);
+
+Vue.component(
+    'id-list',
+    require('./components/dashboardSub/IdList.vue').default
 );
 
 
