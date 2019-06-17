@@ -6,9 +6,12 @@
                     <h3 class="card-title m-0">ID List</h3>
 
                     <div class="card-tools d-flex">
-                        <div class="btn btn-secondary btn-sm mr-3" @click.prevent="printView()">
-                            Print View
-                        </div>
+                        <button class="btn btn-success btn-sm mr-3" @click.prevent="printView('front')">
+                            Front View
+                        </button>
+                        <button class="btn btn-danger btn-sm mr-3" @click.prevent="printView('back')">
+                            Back View
+                        </button>
                         <div class="input-group input-group-sm" style="width: 150px;">
                             <select class="form-control" v-model="sort" @change.prevent="sortId()">
                                 <option value="">Order by:</option>
@@ -78,7 +81,10 @@
                 <div class="modal-content">
 
                     <div class="modal-header">
-                        <div class="btn btn-sm btn-primary" @click.prevent="print()">Print</div>
+                        <div class="btn btn-sm btn-primary" @click.prevent="print()">
+                            <i class="fas fa-print mr-1"></i>
+                            Print
+                        </div>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -90,7 +96,7 @@
                             <div class="col-sm-3 d-flex justify-content-center"
                                 v-for="selected in printViewSelected.data" :key="selected.id">
                                 <div class="card printid">
-                                    <div class="card-body p-0">
+                                    <div class="card-body p-0 front" v-if="front">
                                         <div class="logo-container">
                                             <img src="img/png/logo.png" alt="logo" class="logo">
                                         </div>
@@ -98,9 +104,6 @@
                                         <div class="photoholder">
                                             <img :src="getPhoto(selected.photo, 1)" alt="photo" class="photo">
                                         </div>
-
-                                        <div class="bg1"></div>
-                                        <div class="bg2"></div>
 
                                         <h1 class="name">
                                             {{ selected.firstName }} {{ selected.mi }}. {{ selected.lastName }}
@@ -132,6 +135,10 @@
                                             Validity: {{ selected.expiration }}
                                         </p>
                                     </div>
+
+                                    <div class="card-body p-0 back" v-else>
+                                        <h1>Back View!!!</h1>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -154,6 +161,7 @@
                 checkall: false,
                 checked: [],
                 printViewSelected: {},
+                front: true,
                 form: new Form({
                     type: '',
                     lastName: '',
@@ -199,7 +207,7 @@
                 });
             },
 
-            printView() {
+            printView(view) {
                 if (this.checked.length == 0) {
                     toast.fire({
                         type: 'error',
@@ -209,6 +217,12 @@
                     axios.get('api/printview?q=' + this.checked).then((data) => {
                         this.printViewSelected = data;
                         $('#printView').modal('show');
+
+                        if (view == 'back') {
+                            this.front = false;
+                        } else {
+                            this.front = true;
+                        }
                         console.log(data);
                     });
                 }
@@ -317,13 +331,5 @@
         margin-right: .9rem;
         font-size: 7px;
     }
-
-    /* .bg1 {
-        position: absolute;
-        height: 217px;
-        width: 100%;
-        background-color: #15576f;
-        z-index: 0;
-    } */
 
 </style>

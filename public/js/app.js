@@ -2437,6 +2437,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2445,6 +2452,7 @@ __webpack_require__.r(__webpack_exports__);
       checkall: false,
       checked: [],
       printViewSelected: {},
+      front: true,
       form: new Form({
         type: '',
         lastName: '',
@@ -2485,7 +2493,7 @@ __webpack_require__.r(__webpack_exports__);
         _this2.ids = data; // console.log(data);
       });
     },
-    printView: function printView() {
+    printView: function printView(view) {
       var _this3 = this;
 
       if (this.checked.length == 0) {
@@ -2497,6 +2505,13 @@ __webpack_require__.r(__webpack_exports__);
         axios.get('api/printview?q=' + this.checked).then(function (data) {
           _this3.printViewSelected = data;
           $('#printView').modal('show');
+
+          if (view == 'back') {
+            _this3.front = false;
+          } else {
+            _this3.front = true;
+          }
+
           console.log(data);
         });
       }
@@ -6980,7 +6995,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.printid[data-v-59b9ee3e] {\n    height: 324px;\n    width: 204px;\n}\n#printable[data-v-59b9ee3e] {\n    font-family: Arial, Helvetica, sans-serif;\n}\n@page {\n    size: landscape\n}\n.logo-container[data-v-59b9ee3e] {\n    width: 100%;\n    padding: .8rem;\n}\n.logo[data-v-59b9ee3e] {\n    width: 100%;\n    text-align: center;\n}\n.photoholder[data-v-59b9ee3e] {\n    display: grid;\n    /* position: absolute;\n    z-index: 2; */\n}\n.photo[data-v-59b9ee3e] {\n    justify-self: center;\n    border-radius: 50%;\n    border: 2px solid #ff6600;\n    height: 80px;\n    width: 80px;\n}\n.name[data-v-59b9ee3e] {\n    font-size: 16px;\n    font-weight: bold;\n    text-align: center;\n    margin-top: .8rem;\n    margin-bottom: 0;\n}\n.dept[data-v-59b9ee3e] {\n    font-size: 12px;\n    text-align: center;\n    color: #ff6600;\n    margin-top: .4rem;\n    margin-bottom: .8rem;\n}\n.tbl-container[data-v-59b9ee3e] {\n    display: grid;\n    margin-left: .9rem;\n}\n.info[data-v-59b9ee3e] {\n    justify-self: center;\n    width: 60%;\n    font-size: 8px;\n    line-height: 1.2rem;\n}\n.qrcode img[data-v-59b9ee3e] {\n    width: 50px;\n    margin: 0 .9rem;\n}\n.validity[data-v-59b9ee3e] {\n    text-align: right;\n    margin-right: .9rem;\n    font-size: 7px;\n}\n\n/* .bg1 {\n    position: absolute;\n    height: 217px;\n    width: 100%;\n    background-color: #15576f;\n    z-index: 0;\n} */\n\n", ""]);
+exports.push([module.i, "\n.printid[data-v-59b9ee3e] {\n    height: 324px;\n    width: 204px;\n}\n#printable[data-v-59b9ee3e] {\n    font-family: Arial, Helvetica, sans-serif;\n}\n@page {\n    size: landscape\n}\n.logo-container[data-v-59b9ee3e] {\n    width: 100%;\n    padding: .8rem;\n}\n.logo[data-v-59b9ee3e] {\n    width: 100%;\n    text-align: center;\n}\n.photoholder[data-v-59b9ee3e] {\n    display: grid;\n    /* position: absolute;\n    z-index: 2; */\n}\n.photo[data-v-59b9ee3e] {\n    justify-self: center;\n    border-radius: 50%;\n    border: 2px solid #ff6600;\n    height: 80px;\n    width: 80px;\n}\n.name[data-v-59b9ee3e] {\n    font-size: 16px;\n    font-weight: bold;\n    text-align: center;\n    margin-top: .8rem;\n    margin-bottom: 0;\n}\n.dept[data-v-59b9ee3e] {\n    font-size: 12px;\n    text-align: center;\n    color: #ff6600;\n    margin-top: .4rem;\n    margin-bottom: .8rem;\n}\n.tbl-container[data-v-59b9ee3e] {\n    display: grid;\n    margin-left: .9rem;\n}\n.info[data-v-59b9ee3e] {\n    justify-self: center;\n    width: 60%;\n    font-size: 8px;\n    line-height: 1.2rem;\n}\n.qrcode img[data-v-59b9ee3e] {\n    width: 50px;\n    margin: 0 .9rem;\n}\n.validity[data-v-59b9ee3e] {\n    text-align: right;\n    margin-right: .9rem;\n    font-size: 7px;\n}\n\n", ""]);
 
 // exports
 
@@ -43566,19 +43581,37 @@ var render = function() {
           _vm._v(" "),
           _c("div", { staticClass: "card-tools d-flex" }, [
             _c(
-              "div",
+              "button",
               {
-                staticClass: "btn btn-secondary btn-sm mr-3",
+                staticClass: "btn btn-success btn-sm mr-3",
                 on: {
                   click: function($event) {
                     $event.preventDefault()
-                    return _vm.printView()
+                    return _vm.printView("front")
                   }
                 }
               },
               [
                 _vm._v(
-                  "\n                        Print View\n                    "
+                  "\n                        Front View\n                    "
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-danger btn-sm mr-3",
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    return _vm.printView("back")
+                  }
+                }
+              },
+              [
+                _vm._v(
+                  "\n                        Back View\n                    "
                 )
               ]
             ),
@@ -43818,7 +43851,12 @@ var render = function() {
                       }
                     }
                   },
-                  [_vm._v("Print")]
+                  [
+                    _c("i", { staticClass: "fas fa-print mr-1" }),
+                    _vm._v(
+                      "\n                        Print\n                    "
+                    )
+                  ]
                 ),
                 _vm._v(" "),
                 _vm._m(1)
@@ -43840,82 +43878,94 @@ var render = function() {
                         },
                         [
                           _c("div", { staticClass: "card printid" }, [
-                            _c("div", { staticClass: "card-body p-0" }, [
-                              _vm._m(2, true),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "photoholder" }, [
-                                _c("img", {
-                                  staticClass: "photo",
-                                  attrs: {
-                                    src: _vm.getPhoto(selected.photo, 1),
-                                    alt: "photo"
-                                  }
-                                })
-                              ]),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "bg1" }),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "bg2" }),
-                              _vm._v(" "),
-                              _c("h1", { staticClass: "name" }, [
-                                _vm._v(
-                                  "\n                                        " +
-                                    _vm._s(selected.firstName) +
-                                    " " +
-                                    _vm._s(selected.mi) +
-                                    ". " +
-                                    _vm._s(selected.lastName) +
-                                    "\n                                    "
-                                )
-                              ]),
-                              _vm._v(" "),
-                              _c("h3", { staticClass: "dept" }, [
-                                _vm._v(
-                                  "\n                                        " +
-                                    _vm._s(selected.designation) +
-                                    "\n                                    "
-                                )
-                              ]),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "tbl-container" }, [
-                                _c("table", { staticClass: "info" }, [
-                                  _c("tr", [
-                                    _c("td", [_vm._v("ID#")]),
+                            _vm.front
+                              ? _c(
+                                  "div",
+                                  { staticClass: "card-body p-0 front" },
+                                  [
+                                    _vm._m(2, true),
                                     _vm._v(" "),
-                                    _c("td", [_vm._v(":")]),
+                                    _c("div", { staticClass: "photoholder" }, [
+                                      _c("img", {
+                                        staticClass: "photo",
+                                        attrs: {
+                                          src: _vm.getPhoto(selected.photo, 1),
+                                          alt: "photo"
+                                        }
+                                      })
+                                    ]),
                                     _vm._v(" "),
-                                    _c("td", [_vm._v(_vm._s(selected.empid))])
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("tr", [
-                                    _c("td", [_vm._v("Contact#")]),
+                                    _c("h1", { staticClass: "name" }, [
+                                      _vm._v(
+                                        "\n                                        " +
+                                          _vm._s(selected.firstName) +
+                                          " " +
+                                          _vm._s(selected.mi) +
+                                          ". " +
+                                          _vm._s(selected.lastName) +
+                                          "\n                                    "
+                                      )
+                                    ]),
                                     _vm._v(" "),
-                                    _c("td", [_vm._v(":")]),
+                                    _c("h3", { staticClass: "dept" }, [
+                                      _vm._v(
+                                        "\n                                        " +
+                                          _vm._s(selected.designation) +
+                                          "\n                                    "
+                                      )
+                                    ]),
                                     _vm._v(" "),
-                                    _c("td", [
-                                      _vm._v(_vm._s(selected.contactno))
+                                    _c(
+                                      "div",
+                                      { staticClass: "tbl-container" },
+                                      [
+                                        _c("table", { staticClass: "info" }, [
+                                          _c("tr", [
+                                            _c("td", [_vm._v("ID#")]),
+                                            _vm._v(" "),
+                                            _c("td", [_vm._v(":")]),
+                                            _vm._v(" "),
+                                            _c("td", [
+                                              _vm._v(_vm._s(selected.empid))
+                                            ])
+                                          ]),
+                                          _vm._v(" "),
+                                          _c("tr", [
+                                            _c("td", [_vm._v("Contact#")]),
+                                            _vm._v(" "),
+                                            _c("td", [_vm._v(":")]),
+                                            _vm._v(" "),
+                                            _c("td", [
+                                              _vm._v(_vm._s(selected.contactno))
+                                            ])
+                                          ])
+                                        ])
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c("div", { staticClass: "qrcode" }, [
+                                      _c("img", {
+                                        attrs: {
+                                          src: _vm.getPhoto(selected.qrcode, 2),
+                                          alt: "qrcode"
+                                        }
+                                      })
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("p", { staticClass: "validity" }, [
+                                      _vm._v(
+                                        "\n                                        Validity: " +
+                                          _vm._s(selected.expiration) +
+                                          "\n                                    "
+                                      )
                                     ])
-                                  ])
-                                ])
-                              ]),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "qrcode" }, [
-                                _c("img", {
-                                  attrs: {
-                                    src: _vm.getPhoto(selected.qrcode, 2),
-                                    alt: "qrcode"
-                                  }
-                                })
-                              ]),
-                              _vm._v(" "),
-                              _c("p", { staticClass: "validity" }, [
-                                _vm._v(
-                                  "\n                                        Validity: " +
-                                    _vm._s(selected.expiration) +
-                                    "\n                                    "
+                                  ]
                                 )
-                              ])
-                            ])
+                              : _c(
+                                  "div",
+                                  { staticClass: "card-body p-0 back" },
+                                  [_c("h1", [_vm._v("Back View!!!")])]
+                                )
                           ])
                         ]
                       )
@@ -59280,8 +59330,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\idcreator\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\idcreator\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /home/marc/Documents/Project-folder/IdCreator/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /home/marc/Documents/Project-folder/IdCreator/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
