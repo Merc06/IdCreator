@@ -21,12 +21,12 @@ class CreateIdsTable extends Migration
             $table->string('firstName');
             $table->string('mi');
             $table->string('address');
-            $table->integer('contactno')->nullable();
+            $table->bigInteger('contactno')->nullable();
             $table->string('designation');
             $table->date('bday');
             
             $table->string('contactPerson');
-            $table->string('cpc');
+            $table->bigInteger('cpc');
             $table->string('cpa');
             
             $table->string('tin')->nullable();
@@ -37,7 +37,7 @@ class CreateIdsTable extends Migration
             $table->string('school')->nullable();
             $table->integer('hrs')->nullable();
             $table->string('adv')->nullable();
-            $table->integer('advcontact')->nullable();
+            $table->bigInteger('advcontact')->nullable();
             
             $table->string('photo');
             $table->string('sign');

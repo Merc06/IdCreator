@@ -10,6 +10,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="css/app.css">
+    <!-- <link rel="stylesheet" href="css/print.css" media="print"> -->
 </head>
 
 <body id="bodysidebar" class="hold-transition sidebar-mini">

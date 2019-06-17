@@ -2211,6 +2211,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      editMode: false,
       form: new Form({
         type: 'employee',
         lastName: '',
@@ -2264,18 +2265,46 @@ __webpack_require__.r(__webpack_exports__);
 
       this.$Progress.start();
       this.form.post('/createid').then(function (data) {
-        console.log(data);
+        // console.log(data);
         $('#modalId').modal('hide');
         toast.fire({
           type: 'success',
           title: 'ID Created Successfully'
         }); // this.form.reset();
 
+        Fire.$emit('afterCreateId');
+
         _this2.$Progress.finish();
       })["catch"](function () {
         _this2.$Progress.fail();
       });
+    },
+    updateId: function updateId() {
+      var _this3 = this;
+
+      this.$Progress.start();
+      this.form.post('/updateid').then(function (data) {
+        console.log(data);
+        $('#modalId').modal('hide');
+        toast.fire({
+          type: 'success',
+          title: 'ID Updated Successfully'
+        }); // this.form.reset();
+
+        Fire.$emit('afterCreateId');
+
+        _this3.$Progress.finish();
+      })["catch"](function () {
+        _this3.$Progress.fail();
+      });
     }
+  },
+  created: function created() {
+    var _this4 = this;
+
+    Fire.$on('afterClickEdit', function (data) {
+      _this4.form.fill(data);
+    });
   }
 });
 
@@ -2437,6 +2466,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2445,29 +2482,7 @@ __webpack_require__.r(__webpack_exports__);
       checkall: false,
       checked: [],
       printViewSelected: {},
-      form: new Form({
-        type: '',
-        lastName: '',
-        firstName: '',
-        mi: '',
-        address: '',
-        contactno: '',
-        designation: '',
-        bday: '',
-        contactPerson: '',
-        cpc: '',
-        cpa: '',
-        tin: '',
-        sss: '',
-        philhealth: '',
-        pagibig: '',
-        school: '',
-        hrs: '',
-        adv: '',
-        advcontact: '',
-        photo: '',
-        sign: ''
-      })
+      front: true
     };
   },
   methods: {
@@ -2485,7 +2500,7 @@ __webpack_require__.r(__webpack_exports__);
         _this2.ids = data; // console.log(data);
       });
     },
-    printView: function printView() {
+    printView: function printView(view) {
       var _this3 = this;
 
       if (this.checked.length == 0) {
@@ -2497,6 +2512,13 @@ __webpack_require__.r(__webpack_exports__);
         axios.get('api/printview?q=' + this.checked).then(function (data) {
           _this3.printViewSelected = data;
           $('#printView').modal('show');
+
+          if (view == 'back') {
+            _this3.front = false;
+          } else {
+            _this3.front = true;
+          }
+
           console.log(data);
         });
       }
@@ -2514,10 +2536,19 @@ __webpack_require__.r(__webpack_exports__);
       } else {
         return "img/qrcodes/" + photo;
       }
+    },
+    editId: function editId(info) {
+      Fire.$emit('afterClickEdit', info);
+      $('#modalId').modal('show');
     }
   },
   created: function created() {
+    var _this4 = this;
+
     this.loadId();
+    Fire.$on('afterCreateId', function () {
+      _this4.loadId();
+    });
   }
 });
 
@@ -6980,7 +7011,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.printid[data-v-59b9ee3e] {\n    height: 324px;\n    width: 204px;\n}\n#printable[data-v-59b9ee3e] {\n    font-family: Arial, Helvetica, sans-serif;\n}\n@page {\n    size: landscape\n}\n.logo-container[data-v-59b9ee3e] {\n    width: 100%;\n    padding: .8rem;\n}\n.logo[data-v-59b9ee3e] {\n    width: 100%;\n    text-align: center;\n}\n.photoholder[data-v-59b9ee3e] {\n    display: grid;\n    /* position: absolute;\n    z-index: 2; */\n}\n.photo[data-v-59b9ee3e] {\n    justify-self: center;\n    border-radius: 50%;\n    border: 2px solid #ff6600;\n    height: 80px;\n    width: 80px;\n}\n.name[data-v-59b9ee3e] {\n    font-size: 16px;\n    font-weight: bold;\n    text-align: center;\n    margin-top: .8rem;\n    margin-bottom: 0;\n}\n.dept[data-v-59b9ee3e] {\n    font-size: 12px;\n    text-align: center;\n    color: #ff6600;\n    margin-top: .4rem;\n    margin-bottom: .8rem;\n}\n.tbl-container[data-v-59b9ee3e] {\n    display: grid;\n    margin-left: .9rem;\n}\n.info[data-v-59b9ee3e] {\n    justify-self: center;\n    width: 60%;\n    font-size: 8px;\n    line-height: 1.2rem;\n}\n.qrcode img[data-v-59b9ee3e] {\n    width: 50px;\n    margin: 0 .9rem;\n}\n.validity[data-v-59b9ee3e] {\n    text-align: right;\n    margin-right: .9rem;\n    font-size: 7px;\n}\n\n/* .bg1 {\n    position: absolute;\n    height: 217px;\n    width: 100%;\n    background-color: #15576f;\n    z-index: 0;\n} */\n\n", ""]);
+exports.push([module.i, "\n.printid[data-v-59b9ee3e] {\n    height: 324px;\n    width: 204px;\n}\n#printable[data-v-59b9ee3e] {\n    font-family: Arial, Helvetica, sans-serif;\n    /* color: white !important; */\n}\n.logo-container[data-v-59b9ee3e] {\n    width: 100%;\n    padding: .7rem .8rem;\n}\n.logo[data-v-59b9ee3e] {\n    width: 100%;\n    text-align: center;\n}\n.photoholder[data-v-59b9ee3e] {\n    display: grid;\n    /* position: absolute;\n    z-index: 2; */\n}\n.photo[data-v-59b9ee3e] {\n    justify-self: center;\n    border-radius: 50%;\n    border: 2px solid #15576f;\n    height: 80px;\n    width: 80px;\n}\n.name[data-v-59b9ee3e] {\n    font-size: 16px;\n    font-weight: bold;\n    text-align: center;\n    margin-top: .7rem;\n    margin-bottom: 0;\n    color: white;\n}\n.dept[data-v-59b9ee3e] {\n    font-size: 12px;\n    text-align: center;\n    color: #ff6600;\n    /* margin-top: .2rem; */\n    margin-bottom: .7rem;\n}\n.tbl-container[data-v-59b9ee3e] {\n    display: grid;\n    margin-left: .9rem;\n}\n.info[data-v-59b9ee3e] {\n    justify-self: center;\n    width: 60%;\n    font-size: 10px;\n    line-height: 1.1rem;\n    margin-bottom: .7rem;\n    color: white;\n}\n.qrcode img[data-v-59b9ee3e] {\n    width: 60px;\n    margin: 0 1rem;\n    box-shadow: 1px 1px 3px 0px rgba(0,0,0,0.75);\n}\n.validity[data-v-59b9ee3e] {\n    text-align: right;\n    margin-right: .8rem;\n    font-size: 9px;\n    color: #ff6600;\n    margin-bottom: 0;\n}\n.front[data-v-59b9ee3e] {\n    background: url('/img/png/front_bg.png');\n    border: 1px solid gray;\n    height: 324px;\n    width: 204px;\n}\n@page {\n    size: landscape;\n}\n\n", ""]);
 
 // exports
 
@@ -42425,7 +42456,21 @@ var render = function() {
           },
           [
             _c("div", { staticClass: "modal-content" }, [
-              _vm._m(0),
+              _c("div", { staticClass: "modal-header" }, [
+                !_vm.editMode
+                  ? _c("h5", { staticClass: "modal-title" }, [
+                      _vm._v("Create new ID")
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.editMode
+                  ? _c("h5", { staticClass: "modal-title" }, [
+                      _vm._v("Update ID Info")
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm._m(0)
+              ]),
               _vm._v(" "),
               _c(
                 "form",
@@ -42433,7 +42478,7 @@ var render = function() {
                   on: {
                     submit: function($event) {
                       $event.preventDefault()
-                      return _vm.createId()
+                      _vm.editMode ? _vm.updateId() : _vm.createId()
                     }
                   }
                 },
@@ -43483,7 +43528,38 @@ var render = function() {
                     ])
                   ]),
                   _vm._v(" "),
-                  _vm._m(1)
+                  _c("div", { staticClass: "modal-footer" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-danger",
+                        attrs: { type: "button", "data-dismiss": "modal" }
+                      },
+                      [_vm._v("Cancel")]
+                    ),
+                    _vm._v(" "),
+                    !_vm.editMode
+                      ? _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-success",
+                            attrs: { type: "submit" }
+                          },
+                          [_vm._v("Create")]
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.editMode
+                      ? _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-primary",
+                            attrs: { type: "submit" }
+                          },
+                          [_vm._v("Update")]
+                        )
+                      : _vm._e()
+                  ])
                 ]
               )
             ])
@@ -43498,43 +43574,18 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-header" }, [
-      _c("h5", { staticClass: "modal-title" }, [_vm._v("Create new ID")]),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "close",
-          attrs: {
-            type: "button",
-            "data-dismiss": "modal",
-            "aria-label": "Close"
-          }
-        },
-        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-footer" }, [
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-danger",
-          attrs: { type: "button", "data-dismiss": "modal" }
-        },
-        [_vm._v("Close")]
-      ),
-      _vm._v(" "),
-      _c(
-        "button",
-        { staticClass: "btn btn-success", attrs: { type: "submit" } },
-        [_vm._v("Create")]
-      )
-    ])
+    return _c(
+      "button",
+      {
+        staticClass: "close",
+        attrs: {
+          type: "button",
+          "data-dismiss": "modal",
+          "aria-label": "Close"
+        }
+      },
+      [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+    )
   }
 ]
 render._withStripped = true
@@ -43566,19 +43617,37 @@ var render = function() {
           _vm._v(" "),
           _c("div", { staticClass: "card-tools d-flex" }, [
             _c(
-              "div",
+              "button",
               {
-                staticClass: "btn btn-secondary btn-sm mr-3",
+                staticClass: "btn btn-success btn-sm mr-3",
                 on: {
                   click: function($event) {
                     $event.preventDefault()
-                    return _vm.printView()
+                    return _vm.printView("front")
                   }
                 }
               },
               [
                 _vm._v(
-                  "\n                        Print View\n                    "
+                  "\n                        Front View\n                    "
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-danger btn-sm mr-3",
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    return _vm.printView("back")
+                  }
+                }
+              },
+              [
+                _vm._v(
+                  "\n                        Back View\n                    "
                 )
               ]
             ),
@@ -43774,7 +43843,28 @@ var render = function() {
                     _vm._v(" "),
                     _c("td", [_vm._v(_vm._s(userId.status))]),
                     _vm._v(" "),
-                    _vm._m(0, true)
+                    _c("td", [
+                      _c("div", { staticClass: "btn-group" }, [
+                        _vm._m(0, true),
+                        _vm._v(" "),
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-default btn-flat btn-sm",
+                            attrs: { type: "button" },
+                            on: {
+                              click: function($event) {
+                                $event.preventDefault()
+                                return _vm.editId(userId)
+                              }
+                            }
+                          },
+                          [_c("i", { staticClass: "fas fa-edit" })]
+                        ),
+                        _vm._v(" "),
+                        _vm._m(1, true)
+                      ])
+                    ])
                   ])
                 })
               ],
@@ -43818,10 +43908,15 @@ var render = function() {
                       }
                     }
                   },
-                  [_vm._v("Print")]
+                  [
+                    _c("i", { staticClass: "fas fa-print mr-1" }),
+                    _vm._v(
+                      "\n                        Print\n                    "
+                    )
+                  ]
                 ),
                 _vm._v(" "),
-                _vm._m(1)
+                _vm._m(2)
               ]),
               _vm._v(" "),
               _c(
@@ -43840,82 +43935,94 @@ var render = function() {
                         },
                         [
                           _c("div", { staticClass: "card printid" }, [
-                            _c("div", { staticClass: "card-body p-0" }, [
-                              _vm._m(2, true),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "photoholder" }, [
-                                _c("img", {
-                                  staticClass: "photo",
-                                  attrs: {
-                                    src: _vm.getPhoto(selected.photo, 1),
-                                    alt: "photo"
-                                  }
-                                })
-                              ]),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "bg1" }),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "bg2" }),
-                              _vm._v(" "),
-                              _c("h1", { staticClass: "name" }, [
-                                _vm._v(
-                                  "\n                                        " +
-                                    _vm._s(selected.firstName) +
-                                    " " +
-                                    _vm._s(selected.mi) +
-                                    ". " +
-                                    _vm._s(selected.lastName) +
-                                    "\n                                    "
-                                )
-                              ]),
-                              _vm._v(" "),
-                              _c("h3", { staticClass: "dept" }, [
-                                _vm._v(
-                                  "\n                                        " +
-                                    _vm._s(selected.designation) +
-                                    "\n                                    "
-                                )
-                              ]),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "tbl-container" }, [
-                                _c("table", { staticClass: "info" }, [
-                                  _c("tr", [
-                                    _c("td", [_vm._v("ID#")]),
+                            _vm.front
+                              ? _c(
+                                  "div",
+                                  { staticClass: "card-body p-0 front" },
+                                  [
+                                    _vm._m(3, true),
                                     _vm._v(" "),
-                                    _c("td", [_vm._v(":")]),
+                                    _c("div", { staticClass: "photoholder" }, [
+                                      _c("img", {
+                                        staticClass: "photo",
+                                        attrs: {
+                                          src: _vm.getPhoto(selected.photo, 1),
+                                          alt: "photo"
+                                        }
+                                      })
+                                    ]),
                                     _vm._v(" "),
-                                    _c("td", [_vm._v(_vm._s(selected.empid))])
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("tr", [
-                                    _c("td", [_vm._v("Contact#")]),
+                                    _c("h1", { staticClass: "name" }, [
+                                      _vm._v(
+                                        "\n                                        " +
+                                          _vm._s(selected.firstName) +
+                                          " " +
+                                          _vm._s(selected.mi) +
+                                          ". " +
+                                          _vm._s(selected.lastName) +
+                                          "\n                                    "
+                                      )
+                                    ]),
                                     _vm._v(" "),
-                                    _c("td", [_vm._v(":")]),
+                                    _c("h3", { staticClass: "dept" }, [
+                                      _vm._v(
+                                        "\n                                        " +
+                                          _vm._s(selected.designation) +
+                                          "\n                                    "
+                                      )
+                                    ]),
                                     _vm._v(" "),
-                                    _c("td", [
-                                      _vm._v(_vm._s(selected.contactno))
+                                    _c(
+                                      "div",
+                                      { staticClass: "tbl-container" },
+                                      [
+                                        _c("table", { staticClass: "info" }, [
+                                          _c("tr", [
+                                            _c("td", [_vm._v("ID#")]),
+                                            _vm._v(" "),
+                                            _c("td", [_vm._v(":")]),
+                                            _vm._v(" "),
+                                            _c("td", [
+                                              _vm._v(_vm._s(selected.empid))
+                                            ])
+                                          ]),
+                                          _vm._v(" "),
+                                          _c("tr", [
+                                            _c("td", [_vm._v("Contact#")]),
+                                            _vm._v(" "),
+                                            _c("td", [_vm._v(":")]),
+                                            _vm._v(" "),
+                                            _c("td", [
+                                              _vm._v(_vm._s(selected.contactno))
+                                            ])
+                                          ])
+                                        ])
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c("div", { staticClass: "qrcode" }, [
+                                      _c("img", {
+                                        attrs: {
+                                          src: _vm.getPhoto(selected.qrcode, 2),
+                                          alt: "qrcode"
+                                        }
+                                      })
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("p", { staticClass: "validity" }, [
+                                      _vm._v(
+                                        "\n                                        Validity: " +
+                                          _vm._s(selected.expiration) +
+                                          "\n                                    "
+                                      )
                                     ])
-                                  ])
-                                ])
-                              ]),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "qrcode" }, [
-                                _c("img", {
-                                  attrs: {
-                                    src: _vm.getPhoto(selected.qrcode, 2),
-                                    alt: "qrcode"
-                                  }
-                                })
-                              ]),
-                              _vm._v(" "),
-                              _c("p", { staticClass: "validity" }, [
-                                _vm._v(
-                                  "\n                                        Validity: " +
-                                    _vm._s(selected.expiration) +
-                                    "\n                                    "
+                                  ]
                                 )
-                              ])
-                            ])
+                              : _c(
+                                  "div",
+                                  { staticClass: "card-body p-0 back" },
+                                  [_c("h1", [_vm._v("Back View!!!")])]
+                                )
                           ])
                         ]
                       )
@@ -43936,36 +44043,27 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("td", [
-      _c("div", { staticClass: "btn-group" }, [
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-default btn-flat btn-sm",
-            attrs: { type: "button" }
-          },
-          [_c("i", { staticClass: "fas fa-eye" })]
-        ),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-default btn-flat btn-sm",
-            attrs: { type: "button" }
-          },
-          [_c("i", { staticClass: "fas fa-edit" })]
-        ),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-default btn-flat btn-sm",
-            attrs: { type: "button" }
-          },
-          [_c("i", { staticClass: "fas fa-trash" })]
-        )
-      ])
-    ])
+    return _c(
+      "button",
+      {
+        staticClass: "btn btn-default btn-flat btn-sm",
+        attrs: { type: "button" }
+      },
+      [_c("i", { staticClass: "fas fa-eye" })]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "btn btn-default btn-flat btn-sm",
+        attrs: { type: "button" }
+      },
+      [_c("i", { staticClass: "fas fa-trash" })]
+    )
   },
   function() {
     var _vm = this
@@ -59280,8 +59378,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\IdCreator\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\IdCreator\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /home/marc/Documents/Project-folder/IdCreator/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /home/marc/Documents/Project-folder/IdCreator/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
