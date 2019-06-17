@@ -56,8 +56,9 @@
                                 <td>
                                     <div class="btn-group">
                                         <button type="button" class="btn btn-default btn-flat btn-sm">
-                                            <i class="fas fa-eye"></i></button>
-                                        <button type="button" class="btn btn-default btn-flat btn-sm">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-default btn-flat btn-sm" @click.prevent="editId(userId)">
                                             <i class="fas fa-edit"></i>
                                         </button>
                                         <button type="button" class="btn btn-default btn-flat btn-sm">
@@ -161,34 +162,7 @@
                 checkall: false,
                 checked: [],
                 printViewSelected: {},
-                front: true,
-                form: new Form({
-                    type: '',
-                    lastName: '',
-                    firstName: '',
-                    mi: '',
-                    address: '',
-                    contactno: '',
-                    designation: '',
-                    bday: '',
-
-                    contactPerson: '',
-                    cpc: '',
-                    cpa: '',
-
-                    tin: '',
-                    sss: '',
-                    philhealth: '',
-                    pagibig: '',
-
-                    school: '',
-                    hrs: '',
-                    adv: '',
-                    advcontact: '',
-
-                    photo: '',
-                    sign: ''
-                }),
+                front: true
             }
         },
 
@@ -245,11 +219,20 @@
                 } else {
                     return "img/qrcodes/" + photo;
                 }
+            },
+
+            editId(info) {
+                Fire.$emit('afterClickEdit', info);
+                $('#modalId').modal('show');
             }
         },
 
         created() {
             this.loadId();
+
+            Fire.$on('afterCreateId', () => {
+                this.loadId();
+            });
         }
     }
 
@@ -263,15 +246,12 @@
 
     #printable {
         font-family: Arial, Helvetica, sans-serif;
-    }
-
-    @page {
-        size: landscape
+        /* color: white !important; */
     }
 
     .logo-container {
         width: 100%;
-        padding: .8rem;
+        padding: .7rem .8rem;
     }
 
     .logo {
@@ -288,7 +268,7 @@
     .photo {
         justify-self: center;
         border-radius: 50%;
-        border: 2px solid #ff6600;
+        border: 2px solid #15576f;
         height: 80px;
         width: 80px;
     }
@@ -297,16 +277,17 @@
         font-size: 16px;
         font-weight: bold;
         text-align: center;
-        margin-top: .8rem;
+        margin-top: .7rem;
         margin-bottom: 0;
+        color: white;
     }
 
     .dept {
         font-size: 12px;
         text-align: center;
         color: #ff6600;
-        margin-top: .4rem;
-        margin-bottom: .8rem;
+        /* margin-top: .2rem; */
+        margin-bottom: .7rem;
     }
 
     .tbl-container {
@@ -317,19 +298,37 @@
     .info {
         justify-self: center;
         width: 60%;
-        font-size: 8px;
-        line-height: 1.2rem;
+        font-size: 10px;
+        line-height: 1.1rem;
+        margin-bottom: .7rem;
+        color: white;
     }
 
     .qrcode img {
-        width: 50px;
-        margin: 0 .9rem;
+        width: 60px;
+        margin: 0 1rem;
+        -webkit-box-shadow: 1px 1px 3px 0px rgba(0,0,0,0.75);
+        -moz-box-shadow: 1px 1px 3px 0px rgba(0,0,0,0.75);
+        box-shadow: 1px 1px 3px 0px rgba(0,0,0,0.75);
     }
 
     .validity {
         text-align: right;
-        margin-right: .9rem;
-        font-size: 7px;
+        margin-right: .8rem;
+        font-size: 9px;
+        color: #ff6600;
+        margin-bottom: 0;
+    }
+    
+    .front {
+        background: url('/img/png/front_bg.png');
+        border: 1px solid gray;
+        height: 324px;
+        width: 204px;
+    }
+
+    @page {
+        size: landscape;
     }
 
 </style>

@@ -12,13 +12,13 @@
             <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Create new ID</h5>
-                        <!-- <h5 class="modal-title">Update ID Info</h5> -->
+                        <h5 class="modal-title" v-if="!editMode">Create new ID</h5>
+                        <h5 class="modal-title" v-if="editMode">Update ID Info</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form @submit.prevent="createId()">
+                    <form @submit.prevent="editMode ? updateId() : createId()">
                         <div class="modal-body">
 
                             <div class="row">
@@ -253,9 +253,9 @@
 
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-success">Create</button>
-                            <!-- <button v-show="editMode" type="submit" class="btn btn-primary">Update</button> -->
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                            <button v-if="!editMode" type="submit" class="btn btn-success">Create</button>
+                            <button v-if="editMode" type="submit" class="btn btn-primary">Update</button>
                         </div>
                     </form>
                 </div>
@@ -270,6 +270,7 @@
     export default {
         data() {
             return {
+                editMode: false,
                 form: new Form({
                     type: 'employee',
                     lastName: '',
@@ -326,19 +327,45 @@
                 this.$Progress.start();
                 this.form.post('/createid')
                     .then((data) => {
-                        console.log(data);
+                        // console.log(data);
                         $('#modalId').modal('hide');
                         toast.fire({
                             type: 'success',
                             title: 'ID Created Successfully'
                         });
                         // this.form.reset();
+                        Fire.$emit('afterCreateId');
+                        this.$Progress.finish();
+                    })
+                    .catch(() => {
+                        this.$Progress.fail();
+                    });
+            },
+
+            updateId() {
+                this.$Progress.start();
+                this.form.post('/updateid')
+                    .then((data) => {
+                        console.log(data);
+                        $('#modalId').modal('hide');
+                        toast.fire({
+                            type: 'success',
+                            title: 'ID Updated Successfully'
+                        });
+                        // this.form.reset();
+                        Fire.$emit('afterCreateId');
                         this.$Progress.finish();
                     })
                     .catch(() => {
                         this.$Progress.fail();
                     });
             }
+        },
+
+        created() {
+            Fire.$on('afterClickEdit', (data) => {
+                this.form.fill(data);
+            });
         }
     }
 

@@ -32,6 +32,8 @@ class IdController extends Controller
         
         // GENERATE QRCODE
         QrCode::format('png')
+                ->size(300)
+                ->color(21,87,109)
                 ->generate($qr, 'img/qrcodes/'.$request->firstName.$request->lastName.$request->bday.'.png');
 
         // INSERT INTO DATABASE
