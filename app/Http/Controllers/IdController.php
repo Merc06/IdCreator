@@ -34,6 +34,8 @@ class IdController extends Controller
         QrCode::format('png')
                 ->size(300)
                 ->color(21,87,109)
+                ->merge('/public/img/png/logo1.png', .1)
+                ->errorCorrection('H')
                 ->generate($qr, 'img/qrcodes/'.$request->firstName.$request->lastName.$request->bday.'.png');
 
         // INSERT INTO DATABASE
@@ -83,6 +85,81 @@ class IdController extends Controller
         $id->save();
 
         return 'success';
+    }
+    
+    
+    public function update(Request $request)
+    {
+        $this->validate($request, [
+            'type'          => 'required',
+            'lastName'      => 'required',
+            'firstName'     => 'required',
+            'mi'            => 'required|max:1',
+            'address'       => 'required',
+            'contactno'     => 'required',
+            'designation'   => 'required',
+            'bday'          => 'required|date',
+            'contactPerson' => 'required',
+            'cpc'           => 'required',
+            'cpa'           => 'required',
+            'photo'         => 'required',
+            'sign'          => 'required',
+        ]);
+
+        // UPDATE DATABASE
+        $id = Id::findOrFail($request->id);
+        if($request->photo != $id->photo) {
+            $name = time() . '.' . explode('/', explode(':', substr($request->photo, 0, strpos($request->photo, ';')))[1])[1];
+            \Image::make($request->photo)->save(public_path('img/photo/') . $name);
+            $request->photo = $name;
+        }
+        
+        if($request->sign != $id->sign) {
+            $sign = time() . '.' . explode('/', explode(':', substr($request->sign, 0, strpos($request->sign, ';')))[1])[1];
+            \Image::make($request->sign)->save(public_path('img/sign/') . $sign);
+            $request->sign = $sign;
+        }
+        
+        $id->update([
+            'firstName' => $request->firstName,
+            'lastName' => $request->lastName,
+            'mi' => $request->mi,
+            'address' => $request->address,
+            'contactno' => $request->contactno,
+            'designation' => $request->designation,
+            'bday' => $request->bday,
+            'contactPerson' => $request->contactPerson,
+            'cpc' => $request->cpc,
+            'cpa' => $request->cpa,
+            'tin' => $request->tin,
+            'sss' => $request->sss,
+            'philhealth' => $request->philhealth,
+            'pagibig' => $request->pagibig,
+            'school' => $request->school,
+            'hrs' => $request->hrs,
+            'adv' => $request->adv,
+            'advcontact' => $request->advcontact,
+            'photo' => $request->photo,
+            'sign' => $request->sign,
+        ]);
+        
+
+        return "Update Success!";
+    }
+
+
+    public function delete($id)
+    {
+        $del_id = Id::findOrFail($id);
+        $del_id->delete();
+        return 'Delete Success';
+    }
+
+
+    public function preview($id)
+    {
+        $previd = Id::findOrFail($id)->first();
+        return $previd;
     }
 
 

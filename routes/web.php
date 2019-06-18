@@ -23,4 +23,4 @@ Route::get('{path}', 'HomeController@index')->where( 'path', '[A-z]([0-9a-z_.]+)
 
 Route::post('/createid', 'IdController@store');
 Route::post('/updateid', 'IdController@update');
-// Route::get('/loadid', 'IdController@loadid');
+Route::delete('/deleteid/{id}', 'IdController@delete');

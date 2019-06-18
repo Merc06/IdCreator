@@ -55,13 +55,13 @@
                                 <td>{{ userId.status }}</td>
                                 <td>
                                     <div class="btn-group">
-                                        <button type="button" class="btn btn-default btn-flat btn-sm">
+                                        <button type="button" class="btn btn-default btn-flat btn-sm" @click.prevent="previewId(userId.id)">
                                             <i class="fas fa-eye"></i>
                                         </button>
                                         <button type="button" class="btn btn-default btn-flat btn-sm" @click.prevent="editId(userId)">
                                             <i class="fas fa-edit"></i>
                                         </button>
-                                        <button type="button" class="btn btn-default btn-flat btn-sm">
+                                        <button type="button" class="btn btn-default btn-flat btn-sm" @click.prevent="deleteId(userId.id)">
                                             <i class="fas fa-trash"></i>
                                         </button>
                                     </div>
@@ -149,6 +149,87 @@
                 </div>
             </div>
         </div>
+        
+        <!-- MODAL FOR PREVIEW -->
+        <div class="modal fade" id="preview" tabindex="-1" role="dialog" aria-labelledby="previewTitle"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                <div class="modal-content" v-for="previewId in previd" :key="previewId.empid">
+
+                    <div class="modal-header">
+                        <h3 class="modal-title">{{ previewId.firstName }} {{ previewId.mi }}, {{ previewId.lastName }}</h3>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                    <div class="modal-body">
+
+                        <div class="row">
+
+                            <div class="col-sm-6 d-flex justify-content-center">
+                                <div class="card printid">
+
+                                    <div class="card-body p-0 front">
+                                        <div class="logo-container">
+                                            <img src="img/png/logo.png" alt="logo" class="logo">
+                                        </div>
+
+                                        <div class="photoholder">
+                                            <img :src="getPhoto(previewId.photo, 1)" alt="photo" class="photo">
+                                        </div>
+
+                                        <h1 class="name">
+                                            {{ previewId.firstName }} {{ previewId.mi }}. {{ previewId.lastName }}
+                                        </h1>
+                                        <h3 class="dept">
+                                            {{ previewId.designation }}
+                                        </h3>
+
+                                        <div class="tbl-container">
+                                            <table class="info">
+                                                <tr>
+                                                    <td>ID#</td>
+                                                    <td>:</td>
+                                                    <td>{{ previewId.empid }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Contact#</td>
+                                                    <td>:</td>
+                                                    <td>{{ previewId.contactno }}</td>
+                                                </tr>
+                                            </table>
+                                        </div>
+
+                                        <div class="qrcode">
+                                            <img :src="getPhoto(previewId.qrcode, 2)" alt="qrcode">
+                                        </div>
+
+                                        <p class="validity">
+                                            Validity: {{ previewId.expiration }}
+                                        </p>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6 d-flex justify-content-center">
+                                <div class="card printid">
+
+                                    <div class="card-body p-0 back">
+                                        <h1>Back View</h1>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
 
     </div>
 </template>
@@ -158,6 +239,7 @@
         data() {
             return {
                 ids: {},
+                previd: [],
                 sort: '',
                 checkall: false,
                 checked: [],
@@ -197,7 +279,7 @@
                         } else {
                             this.front = true;
                         }
-                        console.log(data);
+                        // console.log(data);
                     });
                 }
             },
@@ -224,6 +306,43 @@
             editId(info) {
                 Fire.$emit('afterClickEdit', info);
                 $('#modalId').modal('show');
+            },
+
+            deleteId(id) {
+                swal.fire({
+                    title: 'Are you sure you want to delete this?',
+                    text: "You won't be able to revert back!",
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes'
+                }).then((result) => {
+                    // Send Request to server
+                    if (result.value) {
+                        this.$Progress.start();
+                        axios.delete('/deleteid/' + id).then(() => {
+                            swal.fire(
+                                'Deleted!',
+                                'ID has been deleted.',
+                                'success'
+                            );
+                            Fire.$emit('afterCreateId');
+                            this.$Progress.finish();
+                        }).catch(() => {
+                            swal.fire('failed!', 'There was something wrong!', 'warning');
+                            this.$Progress.fail();
+                        });
+                    }
+                });
+            },
+
+            previewId(prev) {
+                axios.get('api/preview/'+prev).then((data) => {
+                    console.log(data);
+                    this.previd = data;
+                    $('#preview').modal('show');
+                });
             }
         },
 
@@ -233,7 +352,7 @@
             Fire.$on('afterCreateId', () => {
                 this.loadId();
             });
-        }
+        },
     }
 
 </script>

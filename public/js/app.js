@@ -2213,6 +2213,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       editMode: false,
       form: new Form({
+        id: '',
         type: 'employee',
         lastName: '',
         firstName: '',
@@ -2239,6 +2240,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     modal: function modal() {
+      this.editMode = false;
       $('#modalId').modal('show');
     },
     updateFile: function updateFile(e) {
@@ -2270,7 +2272,9 @@ __webpack_require__.r(__webpack_exports__);
         toast.fire({
           type: 'success',
           title: 'ID Created Successfully'
-        }); // this.form.reset();
+        });
+
+        _this2.form.reset();
 
         Fire.$emit('afterCreateId');
 
@@ -2303,6 +2307,10 @@ __webpack_require__.r(__webpack_exports__);
     var _this4 = this;
 
     Fire.$on('afterClickEdit', function (data) {
+      _this4.form.reset();
+
+      _this4.editMode = true;
+
       _this4.form.fill(data);
     });
   }
@@ -2474,10 +2482,92 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       ids: {},
+      previd: [],
       sort: '',
       checkall: false,
       checked: [],
@@ -2517,9 +2607,8 @@ __webpack_require__.r(__webpack_exports__);
             _this3.front = false;
           } else {
             _this3.front = true;
-          }
+          } // console.log(data);
 
-          console.log(data);
         });
       }
     },
@@ -2540,14 +2629,52 @@ __webpack_require__.r(__webpack_exports__);
     editId: function editId(info) {
       Fire.$emit('afterClickEdit', info);
       $('#modalId').modal('show');
+    },
+    deleteId: function deleteId(id) {
+      var _this4 = this;
+
+      swal.fire({
+        title: 'Are you sure you want to delete this?',
+        text: "You won't be able to revert back!",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes'
+      }).then(function (result) {
+        // Send Request to server
+        if (result.value) {
+          _this4.$Progress.start();
+
+          axios["delete"]('/deleteid/' + id).then(function () {
+            swal.fire('Deleted!', 'ID has been deleted.', 'success');
+            Fire.$emit('afterCreateId');
+
+            _this4.$Progress.finish();
+          })["catch"](function () {
+            swal.fire('failed!', 'There was something wrong!', 'warning');
+
+            _this4.$Progress.fail();
+          });
+        }
+      });
+    },
+    previewId: function previewId(prev) {
+      var _this5 = this;
+
+      axios.get('api/preview/' + prev).then(function (data) {
+        console.log(data);
+        _this5.previd = data;
+        $('#preview').modal('show');
+      });
     }
   },
   created: function created() {
-    var _this4 = this;
+    var _this6 = this;
 
     this.loadId();
     Fire.$on('afterCreateId', function () {
-      _this4.loadId();
+      _this6.loadId();
     });
   }
 });
@@ -43845,7 +43972,20 @@ var render = function() {
                     _vm._v(" "),
                     _c("td", [
                       _c("div", { staticClass: "btn-group" }, [
-                        _vm._m(0, true),
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-default btn-flat btn-sm",
+                            attrs: { type: "button" },
+                            on: {
+                              click: function($event) {
+                                $event.preventDefault()
+                                return _vm.previewId(userId.id)
+                              }
+                            }
+                          },
+                          [_c("i", { staticClass: "fas fa-eye" })]
+                        ),
                         _vm._v(" "),
                         _c(
                           "button",
@@ -43862,7 +44002,20 @@ var render = function() {
                           [_c("i", { staticClass: "fas fa-edit" })]
                         ),
                         _vm._v(" "),
-                        _vm._m(1, true)
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-default btn-flat btn-sm",
+                            attrs: { type: "button" },
+                            on: {
+                              click: function($event) {
+                                $event.preventDefault()
+                                return _vm.deleteId(userId.id)
+                              }
+                            }
+                          },
+                          [_c("i", { staticClass: "fas fa-trash" })]
+                        )
                       ])
                     ])
                   ])
@@ -43916,7 +44069,7 @@ var render = function() {
                   ]
                 ),
                 _vm._v(" "),
-                _vm._m(2)
+                _vm._m(0)
               ]),
               _vm._v(" "),
               _c(
@@ -43940,7 +44093,7 @@ var render = function() {
                                   "div",
                                   { staticClass: "card-body p-0 front" },
                                   [
-                                    _vm._m(3, true),
+                                    _vm._m(1, true),
                                     _vm._v(" "),
                                     _c("div", { staticClass: "photoholder" }, [
                                       _c("img", {
@@ -44035,6 +44188,138 @@ var render = function() {
           ]
         )
       ]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "preview",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "previewTitle",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          {
+            staticClass: "modal-dialog modal-dialog-centered modal-lg",
+            attrs: { role: "document" }
+          },
+          _vm._l(_vm.previd, function(previewId) {
+            return _c(
+              "div",
+              { key: previewId.empid, staticClass: "modal-content" },
+              [
+                _c("div", { staticClass: "modal-header" }, [
+                  _c("h3", { staticClass: "modal-title" }, [
+                    _vm._v(
+                      _vm._s(previewId.firstName) +
+                        " " +
+                        _vm._s(previewId.mi) +
+                        ", " +
+                        _vm._s(previewId.lastName)
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(2, true)
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "modal-body" }, [
+                  _c("div", { staticClass: "row" }, [
+                    _c(
+                      "div",
+                      { staticClass: "col-sm-6 d-flex justify-content-center" },
+                      [
+                        _c("div", { staticClass: "card printid" }, [
+                          _c("div", { staticClass: "card-body p-0 front" }, [
+                            _vm._m(3, true),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "photoholder" }, [
+                              _c("img", {
+                                staticClass: "photo",
+                                attrs: {
+                                  src: _vm.getPhoto(previewId.photo, 1),
+                                  alt: "photo"
+                                }
+                              })
+                            ]),
+                            _vm._v(" "),
+                            _c("h1", { staticClass: "name" }, [
+                              _vm._v(
+                                "\n                                        " +
+                                  _vm._s(previewId.firstName) +
+                                  " " +
+                                  _vm._s(previewId.mi) +
+                                  ". " +
+                                  _vm._s(previewId.lastName) +
+                                  "\n                                    "
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("h3", { staticClass: "dept" }, [
+                              _vm._v(
+                                "\n                                        " +
+                                  _vm._s(previewId.designation) +
+                                  "\n                                    "
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "tbl-container" }, [
+                              _c("table", { staticClass: "info" }, [
+                                _c("tr", [
+                                  _c("td", [_vm._v("ID#")]),
+                                  _vm._v(" "),
+                                  _c("td", [_vm._v(":")]),
+                                  _vm._v(" "),
+                                  _c("td", [_vm._v(_vm._s(previewId.empid))])
+                                ]),
+                                _vm._v(" "),
+                                _c("tr", [
+                                  _c("td", [_vm._v("Contact#")]),
+                                  _vm._v(" "),
+                                  _c("td", [_vm._v(":")]),
+                                  _vm._v(" "),
+                                  _c("td", [
+                                    _vm._v(_vm._s(previewId.contactno))
+                                  ])
+                                ])
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "qrcode" }, [
+                              _c("img", {
+                                attrs: {
+                                  src: _vm.getPhoto(previewId.qrcode, 2),
+                                  alt: "qrcode"
+                                }
+                              })
+                            ]),
+                            _vm._v(" "),
+                            _c("p", { staticClass: "validity" }, [
+                              _vm._v(
+                                "\n                                        Validity: " +
+                                  _vm._s(previewId.expiration) +
+                                  "\n                                    "
+                              )
+                            ])
+                          ])
+                        ])
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _vm._m(4, true)
+                  ])
+                ])
+              ]
+            )
+          }),
+          0
+        )
+      ]
     )
   ])
 }
@@ -44046,24 +44331,26 @@ var staticRenderFns = [
     return _c(
       "button",
       {
-        staticClass: "btn btn-default btn-flat btn-sm",
-        attrs: { type: "button" }
+        staticClass: "close",
+        attrs: {
+          type: "button",
+          "data-dismiss": "modal",
+          "aria-label": "Close"
+        }
       },
-      [_c("i", { staticClass: "fas fa-eye" })]
+      [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
     )
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "button",
-      {
-        staticClass: "btn btn-default btn-flat btn-sm",
-        attrs: { type: "button" }
-      },
-      [_c("i", { staticClass: "fas fa-trash" })]
-    )
+    return _c("div", { staticClass: "logo-container" }, [
+      _c("img", {
+        staticClass: "logo",
+        attrs: { src: "img/png/logo.png", alt: "logo" }
+      })
+    ])
   },
   function() {
     var _vm = this
@@ -44092,6 +44379,22 @@ var staticRenderFns = [
         attrs: { src: "img/png/logo.png", alt: "logo" }
       })
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "col-sm-6 d-flex justify-content-center" },
+      [
+        _c("div", { staticClass: "card printid" }, [
+          _c("div", { staticClass: "card-body p-0 back" }, [
+            _c("h1", [_vm._v("Back View")])
+          ])
+        ])
+      ]
+    )
   }
 ]
 render._withStripped = true
