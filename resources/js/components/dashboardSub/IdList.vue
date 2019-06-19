@@ -162,7 +162,7 @@
                                                 <tr>
                                                     <td>Please Notify</td>
                                                     <td>:</td>
-                                                    <td>{{ selected.address }}</td>
+                                                    <td>{{ selected.contactPerson }}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>Address</td>
@@ -178,7 +178,7 @@
                                         </div>
 
                                         <div class="signature">
-                                            <img :src="getPhoto(selected.sign, 2)" alt="">
+                                            <img :src="getPhoto(selected.sign, 2)" alt="signature">
                                         </div>
 
                                         <p class="ppsi">
@@ -370,7 +370,7 @@
 
     .tbl-container {
         display: grid;
-        margin-left: .9rem;
+        margin: 0 .9rem;
     }
 
     .info {
@@ -380,6 +380,10 @@
         line-height: 1.1rem;
         margin-bottom: .7rem;
         color: white;
+    }
+
+    .back .info {
+        width: 90%;
     }
 
     .info tr td:first-child {
@@ -404,6 +408,7 @@
     
     .front {
         background: url('/img/png/front_bg.png');
+        background-size: cover;
         border: 1px solid gray;
         height: 324px;
         width: 204px;
@@ -411,6 +416,39 @@
 
     .back {
         background: url('/img/png/back_bg.png');
+        background-size: cover;
+        border: 1px solid gray;
+        height: 324px;
+        width: 204px;
+        padding-top: 2rem !important;
+    }
+
+    .back h3 {
+        font-size: 14px;
+        font-weight: bold;
+        text-align: center;
+        color: white;
+    }
+
+    .back .signature {
+        display: grid;
+        justify-content: right;
+    }
+
+    .back .signature img {
+        margin: .5rem 1rem;
+        width: 50px;
+    }
+
+    .back .ppsi {
+        font-size: 7px;
+        text-align: right;
+        margin: 0 .8rem;
+        line-height: .5rem;
+    }
+
+    .back .ppsi span {
+        color: #ff6600;
     }
 
     @page {

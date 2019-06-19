@@ -116,7 +116,7 @@ class IdController extends Controller
         
         if($request->sign != $id->sign) {
             $sign = time() . '.' . explode('/', explode(':', substr($request->sign, 0, strpos($request->sign, ';')))[1])[1];
-            \Image::make($request->sign)->save(public_path('img/sign/') . $sign);
+            \Image::make($request->sign)->resize(150, 60)->save(public_path('img/sign/') . $sign);
             $request->sign = $sign;
         }
         

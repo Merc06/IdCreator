@@ -7096,7 +7096,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.printid[data-v-59b9ee3e] {\n    height: 324px;\n    width: 204px;\n}\n#printable[data-v-59b9ee3e] {\n    font-family: Arial, Helvetica, sans-serif;\n    /* color: white !important; */\n}\n.logo-container[data-v-59b9ee3e] {\n    width: 100%;\n    padding: .7rem .8rem;\n}\n.logo[data-v-59b9ee3e] {\n    width: 100%;\n    text-align: center;\n}\n.photoholder[data-v-59b9ee3e] {\n    display: grid;\n    /* position: absolute;\n    z-index: 2; */\n}\n.photo[data-v-59b9ee3e] {\n    justify-self: center;\n    border-radius: 50%;\n    border: 2px solid #15576f;\n    height: 80px;\n    width: 80px;\n}\n.name[data-v-59b9ee3e] {\n    font-size: 16px;\n    font-weight: bold;\n    text-align: center;\n    margin-top: .7rem;\n    margin-bottom: 0;\n    color: white;\n}\n.dept[data-v-59b9ee3e] {\n    font-size: 12px;\n    text-align: center;\n    color: #ff6600;\n    /* margin-top: .2rem; */\n    margin-bottom: .7rem;\n}\n.tbl-container[data-v-59b9ee3e] {\n    display: grid;\n    margin-left: .9rem;\n}\n.info[data-v-59b9ee3e] {\n    justify-self: center;\n    width: 60%;\n    font-size: 10px;\n    line-height: 1.1rem;\n    margin-bottom: .7rem;\n    color: white;\n}\n.info tr td[data-v-59b9ee3e]:first-child {\n    color: #ff6600;\n}\n.qrcode img[data-v-59b9ee3e] {\n    width: 60px;\n    margin: 0 1rem;\n    box-shadow: 1px 1px 3px 0px rgba(0,0,0,0.75);\n}\n.validity[data-v-59b9ee3e] {\n    text-align: right;\n    margin-right: .8rem;\n    font-size: 9px;\n    color: #ff6600;\n    margin-bottom: 0;\n}\n.front[data-v-59b9ee3e] {\n    background: url('/img/png/front_bg.png');\n    border: 1px solid gray;\n    height: 324px;\n    width: 204px;\n}\n@page {\n    size: landscape;\n}\n\n", ""]);
+exports.push([module.i, "\n.printid[data-v-59b9ee3e] {\n    height: 324px;\n    width: 204px;\n}\n#printable[data-v-59b9ee3e] {\n    font-family: Arial, Helvetica, sans-serif;\n    /* color: white !important; */\n}\n.logo-container[data-v-59b9ee3e] {\n    width: 100%;\n    padding: .7rem .8rem;\n}\n.logo[data-v-59b9ee3e] {\n    width: 100%;\n    text-align: center;\n}\n.photoholder[data-v-59b9ee3e] {\n    display: grid;\n    /* position: absolute;\n    z-index: 2; */\n}\n.photo[data-v-59b9ee3e] {\n    justify-self: center;\n    border-radius: 50%;\n    border: 2px solid #15576f;\n    height: 80px;\n    width: 80px;\n}\n.name[data-v-59b9ee3e] {\n    font-size: 16px;\n    font-weight: bold;\n    text-align: center;\n    margin-top: .7rem;\n    margin-bottom: 0;\n    color: white;\n}\n.dept[data-v-59b9ee3e] {\n    font-size: 12px;\n    text-align: center;\n    color: #ff6600;\n    /* margin-top: .2rem; */\n    margin-bottom: .7rem;\n}\n.tbl-container[data-v-59b9ee3e] {\n    display: grid;\n    margin: 0 .9rem;\n}\n.info[data-v-59b9ee3e] {\n    justify-self: center;\n    width: 60%;\n    font-size: 10px;\n    line-height: 1.1rem;\n    margin-bottom: .7rem;\n    color: white;\n}\n.back .info[data-v-59b9ee3e] {\n    width: 90%;\n}\n.info tr td[data-v-59b9ee3e]:first-child {\n    color: #ff6600;\n}\n.qrcode img[data-v-59b9ee3e] {\n    width: 60px;\n    margin: 0 1rem;\n    box-shadow: 1px 1px 3px 0px rgba(0,0,0,0.75);\n}\n.validity[data-v-59b9ee3e] {\n    text-align: right;\n    margin-right: .8rem;\n    font-size: 9px;\n    color: #ff6600;\n    margin-bottom: 0;\n}\n.front[data-v-59b9ee3e] {\n    background: url('/img/png/front_bg.png');\n    background-size: cover;\n    border: 1px solid gray;\n    height: 324px;\n    width: 204px;\n}\n.back[data-v-59b9ee3e] {\n    background: url('/img/png/back_bg.png');\n    background-size: cover;\n    border: 1px solid gray;\n    height: 324px;\n    width: 204px;\n    padding-top: 2rem !important;\n}\n.back h3[data-v-59b9ee3e] {\n    font-size: 14px;\n    font-weight: bold;\n    text-align: center;\n    color: white;\n}\n.back .signature[data-v-59b9ee3e] {\n    display: grid;\n    justify-content: right;\n}\n.back .signature img[data-v-59b9ee3e] {\n    margin: .5rem 1rem;\n    width: 50px;\n}\n.back .ppsi[data-v-59b9ee3e] {\n    font-size: 7px;\n    text-align: right;\n    margin: 0 .8rem;\n    line-height: .5rem;\n}\n.back .ppsi span[data-v-59b9ee3e] {\n    color: #ff6600;\n}\n@page {\n    size: landscape;\n}\n\n", ""]);
 
 // exports
 
@@ -44161,7 +44161,9 @@ var render = function() {
                                             _c("td", [_vm._v(":")]),
                                             _vm._v(" "),
                                             _c("td", [
-                                              _vm._v(_vm._s(selected.address))
+                                              _vm._v(
+                                                _vm._s(selected.contactPerson)
+                                              )
                                             ])
                                           ]),
                                           _vm._v(" "),
@@ -44192,7 +44194,7 @@ var render = function() {
                                       _c("img", {
                                         attrs: {
                                           src: _vm.getPhoto(selected.sign, 2),
-                                          alt: ""
+                                          alt: "signature"
                                         }
                                       })
                                     ]),
@@ -59546,8 +59548,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\IdCreator\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\IdCreator\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /home/marc/Documents/Project-folder/IdCreator/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /home/marc/Documents/Project-folder/IdCreator/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
