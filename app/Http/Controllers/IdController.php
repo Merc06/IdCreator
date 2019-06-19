@@ -156,13 +156,6 @@ class IdController extends Controller
     }
 
 
-    public function preview($id)
-    {
-        $previd = Id::findOrFail($id)->first();
-        return $previd;
-    }
-
-
     public function loadid() 
     {
         $ids = Id::get();

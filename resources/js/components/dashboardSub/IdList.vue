@@ -55,9 +55,9 @@
                                 <td>{{ userId.status }}</td>
                                 <td>
                                     <div class="btn-group">
-                                        <button type="button" class="btn btn-default btn-flat btn-sm" @click.prevent="previewId(userId.id)">
+                                        <!-- <button type="button" class="btn btn-default btn-flat btn-sm" @click.prevent="previewId(userId.id)">
                                             <i class="fas fa-eye"></i>
-                                        </button>
+                                        </button> -->
                                         <button type="button" class="btn btn-default btn-flat btn-sm" @click.prevent="editId(userId)">
                                             <i class="fas fa-edit"></i>
                                         </button>
@@ -129,7 +129,7 @@
                                         </div>
 
                                         <div class="qrcode">
-                                            <img :src="getPhoto(selected.qrcode, 2)" alt="qrcode">
+                                            <img :src="getPhoto(selected.qrcode, 3)" alt="qrcode">
                                         </div>
 
                                         <p class="validity">
@@ -138,91 +138,57 @@
                                     </div>
 
                                     <div class="card-body p-0 back" v-else>
-                                        <h1>Back View!!!</h1>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-
-                </div>
-            </div>
-        </div>
-        
-        <!-- MODAL FOR PREVIEW -->
-        <div class="modal fade" id="preview" tabindex="-1" role="dialog" aria-labelledby="previewTitle"
-            aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-                <div class="modal-content" v-for="previewId in previd" :key="previewId.empid">
-
-                    <div class="modal-header">
-                        <h3 class="modal-title">{{ previewId.firstName }} {{ previewId.mi }}, {{ previewId.lastName }}</h3>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-
-                    <div class="modal-body">
-
-                        <div class="row">
-
-                            <div class="col-sm-6 d-flex justify-content-center">
-                                <div class="card printid">
-
-                                    <div class="card-body p-0 front">
-                                        <div class="logo-container">
-                                            <img src="img/png/logo.png" alt="logo" class="logo">
-                                        </div>
-
-                                        <div class="photoholder">
-                                            <img :src="getPhoto(previewId.photo, 1)" alt="photo" class="photo">
-                                        </div>
-
-                                        <h1 class="name">
-                                            {{ previewId.firstName }} {{ previewId.mi }}. {{ previewId.lastName }}
-                                        </h1>
-                                        <h3 class="dept">
-                                            {{ previewId.designation }}
-                                        </h3>
+                                        <h3>Personal Info</h3>
 
                                         <div class="tbl-container">
                                             <table class="info">
                                                 <tr>
-                                                    <td>ID#</td>
+                                                    <td>Address</td>
                                                     <td>:</td>
-                                                    <td>{{ previewId.empid }}</td>
+                                                    <td>{{ selected.address }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Birthdate</td>
+                                                    <td>:</td>
+                                                    <td>{{ selected.bday }}</td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                        
+                                        <h3>In case of emergency</h3>
+
+                                        <div class="tbl-container">
+                                            <table class="info">
+                                                <tr>
+                                                    <td>Please Notify</td>
+                                                    <td>:</td>
+                                                    <td>{{ selected.address }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Address</td>
+                                                    <td>:</td>
+                                                    <td>{{ selected.cpa }}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>Contact#</td>
                                                     <td>:</td>
-                                                    <td>{{ previewId.contactno }}</td>
+                                                    <td>{{ selected.cpc }}</td>
                                                 </tr>
                                             </table>
                                         </div>
 
-                                        <div class="qrcode">
-                                            <img :src="getPhoto(previewId.qrcode, 2)" alt="qrcode">
+                                        <div class="signature">
+                                            <img :src="getPhoto(selected.sign, 2)" alt="">
                                         </div>
 
-                                        <p class="validity">
-                                            Validity: {{ previewId.expiration }}
+                                        <p class="ppsi">
+                                            Unit 602A, Summit One Tower Shaw Blvd.<br>
+                                            Mandaluyong City / 123-1234 / 123-1234<br>
+                                            <span>www.pierreandpaulsolinc.com/</span>
                                         </p>
                                     </div>
-                                    
                                 </div>
                             </div>
-
-                            <div class="col-sm-6 d-flex justify-content-center">
-                                <div class="card printid">
-
-                                    <div class="card-body p-0 back">
-                                        <h1>Back View</h1>
-                                    </div>
-                                    
-                                </div>
-                            </div>
-
                         </div>
 
                     </div>
@@ -239,7 +205,6 @@
         data() {
             return {
                 ids: {},
-                previd: [],
                 sort: '',
                 checkall: false,
                 checked: [],
@@ -298,6 +263,8 @@
             getPhoto(photo, num) {
                 if (num == 1) {
                     return "img/photo/" + photo;
+                } else if (num == 2) {
+                    return "img/sign/" + photo;
                 } else {
                     return "img/qrcodes/" + photo;
                 }
@@ -336,14 +303,6 @@
                     }
                 });
             },
-
-            previewId(prev) {
-                axios.get('api/preview/'+prev).then((data) => {
-                    console.log(data);
-                    this.previd = data;
-                    $('#preview').modal('show');
-                });
-            }
         },
 
         created() {
@@ -423,6 +382,10 @@
         color: white;
     }
 
+    .info tr td:first-child {
+        color: #ff6600;
+    }
+
     .qrcode img {
         width: 60px;
         margin: 0 1rem;
@@ -444,6 +407,10 @@
         border: 1px solid gray;
         height: 324px;
         width: 204px;
+    }
+
+    .back {
+        background: url('/img/png/back_bg.png');
     }
 
     @page {
