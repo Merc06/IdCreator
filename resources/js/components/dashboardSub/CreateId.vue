@@ -272,6 +272,7 @@
             return {
                 editMode: false,
                 form: new Form({
+                    id: '',
                     type: 'employee',
                     lastName: '',
                     firstName: '',
@@ -302,6 +303,7 @@
         },
         methods: {
             modal() {
+                this.editMode = false;
                 $('#modalId').modal('show');
             },
 
@@ -333,7 +335,7 @@
                             type: 'success',
                             title: 'ID Created Successfully'
                         });
-                        // this.form.reset();
+                        this.form.reset();
                         Fire.$emit('afterCreateId');
                         this.$Progress.finish();
                     })
@@ -364,6 +366,8 @@
 
         created() {
             Fire.$on('afterClickEdit', (data) => {
+                this.form.reset();
+                this.editMode = true;
                 this.form.fill(data);
             });
         }
