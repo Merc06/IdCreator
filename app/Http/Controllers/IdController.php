@@ -158,7 +158,7 @@ class IdController extends Controller
 
     public function loadid() 
     {
-        $ids = Id::get();
+        $ids = Id::latest()->get();
 
         return $ids;
     }

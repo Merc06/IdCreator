@@ -2534,8 +2534,8 @@ __webpack_require__.r(__webpack_exports__);
     return {
       ids: {},
       sort: '',
-      checkall: false,
       checked: [],
+      allChecked: false,
       printViewSelected: {},
       front: true
     };
@@ -2592,6 +2592,24 @@ __webpack_require__.r(__webpack_exports__);
       } else {
         return "img/qrcodes/" + photo;
       }
+    },
+    checkAll: function checkAll() {
+      if (this.allChecked) {
+        this.checked = [];
+        console.log(this.ids.data.length);
+        var i = this.ids.data.length;
+
+        for (var a = 0; a < i; a++) {
+          this.checked.push(this.ids.data[a].id);
+        } // this.ids.forEach((userId) => {
+        //     this.checked.push(userId.id);
+        //     // console.log(this.ids[userId]);
+        // });
+
+      }
+    },
+    check: function check() {
+      this.allChecked = false;
     },
     editId: function editId(info) {
       Fire.$emit('afterClickEdit', info);
@@ -43815,35 +43833,39 @@ var render = function() {
                             {
                               name: "model",
                               rawName: "v-model",
-                              value: _vm.checkall,
-                              expression: "checkall"
+                              value: _vm.allChecked,
+                              expression: "allChecked"
                             }
                           ],
                           staticClass: "form-check-input",
                           attrs: { type: "checkbox" },
                           domProps: {
-                            checked: Array.isArray(_vm.checkall)
-                              ? _vm._i(_vm.checkall, null) > -1
-                              : _vm.checkall
+                            checked: Array.isArray(_vm.allChecked)
+                              ? _vm._i(_vm.allChecked, null) > -1
+                              : _vm.allChecked
                           },
                           on: {
+                            click: function($event) {
+                              return _vm.checkAll()
+                            },
                             change: function($event) {
-                              var $$a = _vm.checkall,
+                              var $$a = _vm.allChecked,
                                 $$el = $event.target,
                                 $$c = $$el.checked ? true : false
                               if (Array.isArray($$a)) {
                                 var $$v = null,
                                   $$i = _vm._i($$a, $$v)
                                 if ($$el.checked) {
-                                  $$i < 0 && (_vm.checkall = $$a.concat([$$v]))
+                                  $$i < 0 &&
+                                    (_vm.allChecked = $$a.concat([$$v]))
                                 } else {
                                   $$i > -1 &&
-                                    (_vm.checkall = $$a
+                                    (_vm.allChecked = $$a
                                       .slice(0, $$i)
                                       .concat($$a.slice($$i + 1)))
                                 }
                               } else {
-                                _vm.checkall = $$c
+                                _vm.allChecked = $$c
                               }
                             }
                           }
@@ -43886,6 +43908,7 @@ var render = function() {
                                 : _vm.checked
                             },
                             on: {
+                              click: _vm.check,
                               change: function($event) {
                                 var $$a = _vm.checked,
                                   $$el = $event.target,
