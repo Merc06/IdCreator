@@ -283,6 +283,7 @@
             checkAll() {
                 if(this.allChecked) {
                     this.checked = [];
+                    // this.allChecked = !this.allChecked;
                     console.log(this.ids.data.length);
                     let i = this.ids.data.length;
                     for(let a = 0; a < i; a++) {
@@ -293,6 +294,8 @@
                     //     this.checked.push(userId.id);
                     //     // console.log(this.ids[userId]);
                     // });
+                } else {
+                    this.checked = [];
                 }
             },
 

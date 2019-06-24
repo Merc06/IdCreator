@@ -2605,7 +2605,8 @@ __webpack_require__.r(__webpack_exports__);
     },
     checkAll: function checkAll() {
       if (this.allChecked) {
-        this.checked = [];
+        this.checked = []; // this.allChecked = !this.allChecked;
+
         console.log(this.ids.data.length);
         var i = this.ids.data.length;
 
@@ -2616,6 +2617,8 @@ __webpack_require__.r(__webpack_exports__);
         //     // console.log(this.ids[userId]);
         // });
 
+      } else {
+        this.checked = [];
       }
     },
     check: function check() {
@@ -63541,8 +63544,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\IdCreator\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\IdCreator\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /home/marc/Documents/Project-folder/IdCreator/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /home/marc/Documents/Project-folder/IdCreator/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
