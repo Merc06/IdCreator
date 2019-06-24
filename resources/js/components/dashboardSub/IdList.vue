@@ -98,43 +98,31 @@
                                 v-for="selected in printViewSelected.data" :key="selected.id">
                                 <div class="card printid">
                                     <div class="card-body p-0 front" v-if="front">
-                                        <div class="logo-container">
-                                            <img src="img/png/logo.png" alt="logo" class="logo">
-                                        </div>
 
-                                        <div class="photoholder">
+                                        <div class="idContainer">
                                             <img :src="getPhoto(selected.photo, 1)" alt="photo" class="photo">
-                                        </div>
+                                        
+											<h1 class="name">
+												{{ selected.firstName }} {{ selected.mi }}. {{ selected.lastName }}
+											</h1>
+											
+											<p class="idno">{{ selected.empid }}</p>
+											
+											<p class="dept">
+												{{ selected.designation }}
+											</p>
+											
+											<img :src="getPhoto(selected.sign, 2)" alt="sign" class="sign">
 
-                                        <h1 class="name">
-                                            {{ selected.firstName }} {{ selected.mi }}. {{ selected.lastName }}
-                                        </h1>
-                                        <h3 class="dept">
-                                            {{ selected.designation }}
-                                        </h3>
-
-                                        <div class="tbl-container">
-                                            <table class="info">
-                                                <tr>
-                                                    <td>ID#</td>
-                                                    <td>:</td>
-                                                    <td>{{ selected.empid }}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Contact#</td>
-                                                    <td>:</td>
-                                                    <td>{{ selected.contactno }}</td>
-                                                </tr>
-                                            </table>
-                                        </div>
-
-                                        <div class="qrcode">
-                                            <img :src="getPhoto(selected.qrcode, 3)" alt="qrcode">
-                                        </div>
-
-                                        <p class="validity">
-                                            Validity: {{ selected.expiration }}
-                                        </p>
+											<p class="validity">
+												Date Validity: {{ selected.expiration }}
+											</p>
+										
+											<barcode :value="selected.lastName" height="20" displayValue="false" width="1">
+												Show this if the rendering fails.
+											</barcode>
+										</div>
+										
                                     </div>
 
                                     <div class="card-body p-0 back" v-else>
@@ -151,6 +139,26 @@
                                                     <td>Birthdate</td>
                                                     <td>:</td>
                                                     <td>{{ selected.bday }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>TIN</td>
+                                                    <td>:</td>
+                                                    <td>{{ selected.tin }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>SSS</td>
+                                                    <td>:</td>
+                                                    <td>{{ selected.sss }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>PhilHealth</td>
+                                                    <td>:</td>
+                                                    <td>{{ selected.philhealth }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Pag-ibig</td>
+                                                    <td>:</td>
+                                                    <td>{{ selected.pagibig }}</td>
                                                 </tr>
                                             </table>
                                         </div>
@@ -177,10 +185,6 @@
                                             </table>
                                         </div>
 
-                                        <div class="signature">
-                                            <img :src="getPhoto(selected.sign, 2)" alt="signature">
-                                        </div>
-
                                         <p class="ppsi">
                                             Unit 602A, Summit One Tower Shaw Blvd.<br>
                                             Mandaluyong City / 123-1234 / 123-1234<br>
@@ -201,6 +205,8 @@
 </template>
 
 <script>
+	import VueBarcode from 'vue-barcode';
+
     export default {
         data() {
             return {
@@ -212,6 +218,10 @@
                 front: true
             }
         },
+		
+		components: {
+			'barcode': VueBarcode
+		},
 
         methods: {
             loadId() {
@@ -337,138 +347,76 @@
 </script>
 
 <style scoped>
-    .printid {
-        height: 324px;
-        width: 204px;
-    }
-
-    #printable {
-        font-family: Arial, Helvetica, sans-serif;
-        /* color: white !important; */
-    }
-
-    .logo-container {
-        width: 100%;
-        padding: .7rem .8rem;
-    }
-
-    .logo {
-        width: 100%;
-        text-align: center;
-    }
-
-    .photoholder {
-        display: grid;
-        /* position: absolute;
-        z-index: 2; */
-    }
-
-    .photo {
-        justify-self: center;
-        border-radius: 50%;
-        border: 2px solid #15576f;
-        height: 80px;
-        width: 80px;
-    }
-
-    .name {
-        font-size: 16px;
-        font-weight: bold;
-        text-align: center;
-        margin-top: .7rem;
-        margin-bottom: 0;
-        color: white;
-    }
-
-    .dept {
-        font-size: 12px;
-        text-align: center;
-        color: #ff6600;
-        /* margin-top: .2rem; */
-        margin-bottom: .7rem;
-    }
-
-    .tbl-container {
-        display: grid;
-        margin: 0 .9rem;
-    }
-
-    .info {
-        justify-self: center;
-        width: 60%;
-        font-size: 10px;
-        line-height: 1.1rem;
-        margin-bottom: .7rem;
-        color: white;
-    }
-
-    .back .info {
-        width: 90%;
-    }
-
-    .info tr td:first-child {
-        color: #ff6600;
-    }
-
-    .qrcode img {
-        width: 60px;
-        margin: 0 1rem;
-        -webkit-box-shadow: 1px 1px 3px 0px rgba(0,0,0,0.75);
-        -moz-box-shadow: 1px 1px 3px 0px rgba(0,0,0,0.75);
-        box-shadow: 1px 1px 3px 0px rgba(0,0,0,0.75);
-    }
+	.printid {
+		height: 324px;
+		width: 204px;
+        -webkit-transform: scaleX(-1);
+      transform: scaleX(-1);
+	}
+	
+    .front {
+		background: url('/img/png/bg1.png');
+		background-size: cover;
+		padding-left: 2.6rem !important;
+	}
+	
+	.idContainer {
+		display: grid;
+		justify-items: center;
+		margin-top: 1.6rem;
+	}
+	
+	.idContainer .photo {
+		border-radius: 50%;
+		border: 1px solid black;
+		width: 80px;
+		height: 80px;
+	}
+	
+	.name {
+		font-size: 14px;
+		font-weight: bold;
+		margin-top: 1rem;
+	}
+	
+	.idno {
+		font-size: 12px;
+	}
+	
+	.dept {
+		font-size: 12px;
+	}
+	
+	.sign {
+		height: 30px;
+		width: 60px;
+        margin-bottom: .5rem;
+	}
 
     .validity {
-        text-align: right;
-        margin-right: .8rem;
-        font-size: 9px;
-        color: #ff6600;
-        margin-bottom: 0;
-    }
-    
-    .front {
-        background: url('/img/png/front_bg.png');
-        background-size: cover;
-        border: 1px solid gray;
-        height: 324px;
-        width: 204px;
+        margin: 0;
+        font-size: 10px;
     }
 
     .back {
-        background: url('/img/png/back_bg.png');
-        background-size: cover;
-        border: 1px solid gray;
-        height: 324px;
-        width: 204px;
-        padding-top: 2rem !important;
+        padding: 1rem !important;
     }
 
     .back h3 {
-        font-size: 14px;
-        font-weight: bold;
         text-align: center;
-        color: white;
+        font-size: 10px;
+        font-weight: bold;
+        text-transform: uppercase;
     }
 
-    .back .signature {
-        display: grid;
-        justify-content: right;
+    .tbl-container {
+        font-size: 9px;
+        margin-bottom: .6rem;
     }
 
-    .back .signature img {
-        margin: .5rem 1rem;
-        width: 50px;
-    }
-
-    .back .ppsi {
-        font-size: 7px;
-        text-align: right;
-        margin: 0 .8rem;
-        line-height: .5rem;
-    }
-
-    .back .ppsi span {
-        color: #ff6600;
+    .ppsi {
+        font-size: 8px;
+        text-align: center;
     }
 
     @page {
