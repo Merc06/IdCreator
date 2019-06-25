@@ -267,6 +267,14 @@
 
                 window.print();
 
+                setTimeout(() => {
+                    axios.get('api/printed?q='+this.checked).then((data) => {
+                        console.log(data);
+                        $('#printView').modal('hide');
+                        this.loadId();
+                    });
+                }, 100)
+
                 document.body.innerHTML = originalContents;
             },
 

@@ -2588,10 +2588,19 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     print: function print() {
+      var _this4 = this;
+
       var printContents = document.getElementById('printable').innerHTML;
       var originalContents = document.body.innerHTML;
       document.body.innerHTML = printContents;
       window.print();
+      setTimeout(function () {
+        axios.get('api/printed?q=' + _this4.checked).then(function (data) {
+          console.log(data);
+
+          _this4.loadId();
+        });
+      }, 100);
       document.body.innerHTML = originalContents;
     },
     getPhoto: function getPhoto(photo, num) {
@@ -2629,7 +2638,7 @@ __webpack_require__.r(__webpack_exports__);
       $('#modalId').modal('show');
     },
     deleteId: function deleteId(id) {
-      var _this4 = this;
+      var _this5 = this;
 
       swal.fire({
         title: 'Are you sure you want to delete this?',
@@ -2642,28 +2651,28 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (result) {
         // Send Request to server
         if (result.value) {
-          _this4.$Progress.start();
+          _this5.$Progress.start();
 
           axios["delete"]('/deleteid/' + id).then(function () {
             swal.fire('Deleted!', 'ID has been deleted.', 'success');
             Fire.$emit('afterCreateId');
 
-            _this4.$Progress.finish();
+            _this5.$Progress.finish();
           })["catch"](function () {
             swal.fire('failed!', 'There was something wrong!', 'warning');
 
-            _this4.$Progress.fail();
+            _this5.$Progress.fail();
           });
         }
       });
     }
   },
   created: function created() {
-    var _this5 = this;
+    var _this6 = this;
 
     this.loadId();
     Fire.$on('afterCreateId', function () {
-      _this5.loadId();
+      _this6.loadId();
     });
   }
 });
