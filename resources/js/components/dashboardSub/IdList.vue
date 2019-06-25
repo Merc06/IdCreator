@@ -118,7 +118,7 @@
 												Date Validity: {{ selected.expiration }}
 											</p>
 										
-											<barcode :value="selected.lastName" height="20" displayValue="false" width="1">
+											<barcode :value="selected.empid" height="20" displayValue="false" width="1">
 												Show this if the rendering fails.
 											</barcode>
 										</div>
@@ -140,6 +140,7 @@
                                                     <td>:</td>
                                                     <td>{{ selected.bday }}</td>
                                                 </tr>
+                                                <template v-if="selected.type == 'employee'">
                                                 <tr>
                                                     <td>TIN</td>
                                                     <td>:</td>
@@ -160,6 +161,24 @@
                                                     <td>:</td>
                                                     <td>{{ selected.pagibig }}</td>
                                                 </tr>
+                                                </template>
+                                                <template v-else>
+                                                <tr>
+                                                    <td>School</td>
+                                                    <td>:</td>
+                                                    <td>{{ selected.school }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>HRS</td>
+                                                    <td>:</td>
+                                                    <td>{{ selected.hrs }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Adviser</td>
+                                                    <td>:</td>
+                                                    <td>{{ selected.adv }}</td>
+                                                </tr>
+                                                </template>
                                             </table>
                                         </div>
                                         
@@ -417,6 +436,10 @@
     .ppsi {
         font-size: 8px;
         text-align: center;
+    }
+
+    svg {
+        max-width: 150px !important;
     }
 
     @page {

@@ -237,7 +237,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-md-6">
+                                        <div class="col-md-6" v-if="form.type == 'employee'">
                                             <label>Signature:</label>
                                             <div class="form-group">
                                                 <input type="file" id="sign" @change="updateFile" class="form-control" :class="{ 'is-invalid': form.errors.has('sign') }">

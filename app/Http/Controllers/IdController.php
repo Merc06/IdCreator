@@ -23,7 +23,7 @@ class IdController extends Controller
             'cpc'           => 'required',
             'cpa'           => 'required',
             'photo'         => 'required',
-            'sign'          => 'required',
+            // 'sign'          => 'required',
         ]);
 
         // DETAILS SHOW IN QRCODE
@@ -74,9 +74,11 @@ class IdController extends Controller
         \Image::make($request->photo)->save(public_path('img/photo/') . $name);
         $id->photo = $name;
         // SIGNATURE
-        $sign = time() . '.' . explode('/', explode(':', substr($request->sign, 0, strpos($request->sign, ';')))[1])[1];
-        \Image::make($request->sign)->save(public_path('img/sign/') . $sign);
-        $id->sign = $sign;
+        if(!empty($request->sign)) {
+	        $sign = time() . '.' . explode('/', explode(':', substr($request->sign, 0, strpos($request->sign, ';')))[1])[1];
+	        \Image::make($request->sign)->save(public_path('img/sign/') . $sign);
+	        $id->sign = $sign;
+        }
         // QR CODE
         $id->qrcode = $request->firstName.$request->lastName.$request->bday.'.png';
 
@@ -103,7 +105,7 @@ class IdController extends Controller
             'cpc'           => 'required',
             'cpa'           => 'required',
             'photo'         => 'required',
-            'sign'          => 'required',
+            // 'sign'          => 'required',
         ]);
 
         // UPDATE DATABASE
@@ -121,6 +123,7 @@ class IdController extends Controller
         }
         
         $id->update([
+        	'type' => $request->type,
             'firstName' => $request->firstName,
             'lastName' => $request->lastName,
             'mi' => $request->mi,

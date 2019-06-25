@@ -2535,6 +2535,25 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -7124,7 +7143,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.printid[data-v-59b9ee3e] {\n\t\theight: 324px;\n\t\twidth: 204px;\n      transform: scaleX(-1);\n}\n.front[data-v-59b9ee3e] {\n\t\tbackground: url('/img/png/bg1.png');\n\t\tbackground-size: cover;\n\t\tpadding-left: 2.6rem !important;\n}\n.idContainer[data-v-59b9ee3e] {\n\t\tdisplay: grid;\n\t\tjustify-items: center;\n\t\tmargin-top: 1.6rem;\n}\n.idContainer .photo[data-v-59b9ee3e] {\n\t\tborder-radius: 50%;\n\t\tborder: 1px solid black;\n\t\twidth: 80px;\n\t\theight: 80px;\n}\n.name[data-v-59b9ee3e] {\n\t\tfont-size: 14px;\n\t\tfont-weight: bold;\n\t\tmargin-top: 1rem;\n}\n.idno[data-v-59b9ee3e] {\n\t\tfont-size: 12px;\n}\n.dept[data-v-59b9ee3e] {\n\t\tfont-size: 12px;\n}\n.sign[data-v-59b9ee3e] {\n\t\theight: 30px;\n\t\twidth: 60px;\n        margin-bottom: .5rem;\n}\n.validity[data-v-59b9ee3e] {\n        margin: 0;\n        font-size: 10px;\n}\n.back[data-v-59b9ee3e] {\n        padding: 1rem !important;\n}\n.back h3[data-v-59b9ee3e] {\n        text-align: center;\n        font-size: 10px;\n        font-weight: bold;\n        text-transform: uppercase;\n}\n.tbl-container[data-v-59b9ee3e] {\n        font-size: 9px;\n        margin-bottom: .6rem;\n}\n.ppsi[data-v-59b9ee3e] {\n        font-size: 8px;\n        text-align: center;\n}\n@page {\n        size: landscape;\n}\n\n", ""]);
+exports.push([module.i, "\n.printid[data-v-59b9ee3e] {\n\t\theight: 324px;\n\t\twidth: 204px;\n      transform: scaleX(-1);\n}\n.front[data-v-59b9ee3e] {\n\t\tbackground: url('/img/png/bg1.png');\n\t\tbackground-size: cover;\n\t\tpadding-left: 2.6rem !important;\n}\n.idContainer[data-v-59b9ee3e] {\n\t\tdisplay: grid;\n\t\tjustify-items: center;\n\t\tmargin-top: 1.6rem;\n}\n.idContainer .photo[data-v-59b9ee3e] {\n\t\tborder-radius: 50%;\n\t\tborder: 1px solid black;\n\t\twidth: 80px;\n\t\theight: 80px;\n}\n.name[data-v-59b9ee3e] {\n\t\tfont-size: 14px;\n\t\tfont-weight: bold;\n\t\tmargin-top: 1rem;\n}\n.idno[data-v-59b9ee3e] {\n\t\tfont-size: 12px;\n}\n.dept[data-v-59b9ee3e] {\n\t\tfont-size: 12px;\n}\n.sign[data-v-59b9ee3e] {\n\t\theight: 30px;\n\t\twidth: 60px;\n        margin-bottom: .5rem;\n}\n.validity[data-v-59b9ee3e] {\n        margin: 0;\n        font-size: 10px;\n}\n.back[data-v-59b9ee3e] {\n        padding: 1rem !important;\n}\n.back h3[data-v-59b9ee3e] {\n        text-align: center;\n        font-size: 10px;\n        font-weight: bold;\n        text-transform: uppercase;\n}\n.tbl-container[data-v-59b9ee3e] {\n        font-size: 9px;\n        margin-bottom: .6rem;\n}\n.ppsi[data-v-59b9ee3e] {\n        font-size: 8px;\n        text-align: center;\n}\nsvg[data-v-59b9ee3e] {\n        max-width: 150px !important;\n}\n@page {\n        size: landscape;\n}\n\n", ""]);
 
 // exports
 
@@ -47548,29 +47567,33 @@ var render = function() {
                             )
                           ]),
                           _vm._v(" "),
-                          _c("div", { staticClass: "col-md-6" }, [
-                            _c("label", [_vm._v("Signature:")]),
-                            _vm._v(" "),
-                            _c(
-                              "div",
-                              { staticClass: "form-group" },
-                              [
-                                _c("input", {
-                                  staticClass: "form-control",
-                                  class: {
-                                    "is-invalid": _vm.form.errors.has("sign")
-                                  },
-                                  attrs: { type: "file", id: "sign" },
-                                  on: { change: _vm.updateFile }
-                                }),
+                          _vm.form.type == "employee"
+                            ? _c("div", { staticClass: "col-md-6" }, [
+                                _c("label", [_vm._v("Signature:")]),
                                 _vm._v(" "),
-                                _c("has-error", {
-                                  attrs: { form: _vm.form, field: "sign" }
-                                })
-                              ],
-                              1
-                            )
-                          ])
+                                _c(
+                                  "div",
+                                  { staticClass: "form-group" },
+                                  [
+                                    _c("input", {
+                                      staticClass: "form-control",
+                                      class: {
+                                        "is-invalid": _vm.form.errors.has(
+                                          "sign"
+                                        )
+                                      },
+                                      attrs: { type: "file", id: "sign" },
+                                      on: { change: _vm.updateFile }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("has-error", {
+                                      attrs: { form: _vm.form, field: "sign" }
+                                    })
+                                  ],
+                                  1
+                                )
+                              ])
+                            : _vm._e()
                         ])
                       ])
                     ])
@@ -48068,7 +48091,7 @@ var render = function() {
                                           "barcode",
                                           {
                                             attrs: {
-                                              value: selected.lastName,
+                                              value: selected.empid,
                                               height: "20",
                                               displayValue: "false",
                                               width: "1"
@@ -48095,69 +48118,130 @@ var render = function() {
                                       "div",
                                       { staticClass: "tbl-container" },
                                       [
-                                        _c("table", { staticClass: "info" }, [
-                                          _c("tr", [
-                                            _c("td", [_vm._v("Address")]),
+                                        _c(
+                                          "table",
+                                          { staticClass: "info" },
+                                          [
+                                            _c("tr", [
+                                              _c("td", [_vm._v("Address")]),
+                                              _vm._v(" "),
+                                              _c("td", [_vm._v(":")]),
+                                              _vm._v(" "),
+                                              _c("td", [
+                                                _vm._v(_vm._s(selected.address))
+                                              ])
+                                            ]),
                                             _vm._v(" "),
-                                            _c("td", [_vm._v(":")]),
+                                            _c("tr", [
+                                              _c("td", [_vm._v("Birthdate")]),
+                                              _vm._v(" "),
+                                              _c("td", [_vm._v(":")]),
+                                              _vm._v(" "),
+                                              _c("td", [
+                                                _vm._v(_vm._s(selected.bday))
+                                              ])
+                                            ]),
                                             _vm._v(" "),
-                                            _c("td", [
-                                              _vm._v(_vm._s(selected.address))
-                                            ])
-                                          ]),
-                                          _vm._v(" "),
-                                          _c("tr", [
-                                            _c("td", [_vm._v("Birthdate")]),
-                                            _vm._v(" "),
-                                            _c("td", [_vm._v(":")]),
-                                            _vm._v(" "),
-                                            _c("td", [
-                                              _vm._v(_vm._s(selected.bday))
-                                            ])
-                                          ]),
-                                          _vm._v(" "),
-                                          _c("tr", [
-                                            _c("td", [_vm._v("TIN")]),
-                                            _vm._v(" "),
-                                            _c("td", [_vm._v(":")]),
-                                            _vm._v(" "),
-                                            _c("td", [
-                                              _vm._v(_vm._s(selected.tin))
-                                            ])
-                                          ]),
-                                          _vm._v(" "),
-                                          _c("tr", [
-                                            _c("td", [_vm._v("SSS")]),
-                                            _vm._v(" "),
-                                            _c("td", [_vm._v(":")]),
-                                            _vm._v(" "),
-                                            _c("td", [
-                                              _vm._v(_vm._s(selected.sss))
-                                            ])
-                                          ]),
-                                          _vm._v(" "),
-                                          _c("tr", [
-                                            _c("td", [_vm._v("PhilHealth")]),
-                                            _vm._v(" "),
-                                            _c("td", [_vm._v(":")]),
-                                            _vm._v(" "),
-                                            _c("td", [
-                                              _vm._v(
-                                                _vm._s(selected.philhealth)
-                                              )
-                                            ])
-                                          ]),
-                                          _vm._v(" "),
-                                          _c("tr", [
-                                            _c("td", [_vm._v("Pag-ibig")]),
-                                            _vm._v(" "),
-                                            _c("td", [_vm._v(":")]),
-                                            _vm._v(" "),
-                                            _c("td", [
-                                              _vm._v(_vm._s(selected.pagibig))
-                                            ])
-                                          ])
-                                        ])
+                                            selected.type == "employee"
+                                              ? [
+                                                  _c("tr", [
+                                                    _c("td", [_vm._v("TIN")]),
+                                                    _vm._v(" "),
+                                                    _c("td", [_vm._v(":")]),
+                                                    _vm._v(" "),
+                                                    _c("td", [
+                                                      _vm._v(
+                                                        _vm._s(selected.tin)
+                                                      )
+                                                    ])
+                                                  ]),
+                                                  _vm._v(" "),
+                                                  _c("tr", [
+                                                    _c("td", [_vm._v("SSS")]),
+                                                    _vm._v(" "),
+                                                    _c("td", [_vm._v(":")]),
+                                                    _vm._v(" "),
+                                                    _c("td", [
+                                                      _vm._v(
+                                                        _vm._s(selected.sss)
+                                                      )
+                                                    ])
+                                                  ]),
+                                                  _vm._v(" "),
+                                                  _c("tr", [
+                                                    _c("td", [
+                                                      _vm._v("PhilHealth")
+                                                    ]),
+                                                    _vm._v(" "),
+                                                    _c("td", [_vm._v(":")]),
+                                                    _vm._v(" "),
+                                                    _c("td", [
+                                                      _vm._v(
+                                                        _vm._s(
+                                                          selected.philhealth
+                                                        )
+                                                      )
+                                                    ])
+                                                  ]),
+                                                  _vm._v(" "),
+                                                  _c("tr", [
+                                                    _c("td", [
+                                                      _vm._v("Pag-ibig")
+                                                    ]),
+                                                    _vm._v(" "),
+                                                    _c("td", [_vm._v(":")]),
+                                                    _vm._v(" "),
+                                                    _c("td", [
+                                                      _vm._v(
+                                                        _vm._s(selected.pagibig)
+                                                      )
+                                                    ])
+                                                  ])
+                                                ]
+                                              : [
+                                                  _c("tr", [
+                                                    _c("td", [
+                                                      _vm._v("School")
+                                                    ]),
+                                                    _vm._v(" "),
+                                                    _c("td", [_vm._v(":")]),
+                                                    _vm._v(" "),
+                                                    _c("td", [
+                                                      _vm._v(
+                                                        _vm._s(selected.school)
+                                                      )
+                                                    ])
+                                                  ]),
+                                                  _vm._v(" "),
+                                                  _c("tr", [
+                                                    _c("td", [_vm._v("HRS")]),
+                                                    _vm._v(" "),
+                                                    _c("td", [_vm._v(":")]),
+                                                    _vm._v(" "),
+                                                    _c("td", [
+                                                      _vm._v(
+                                                        _vm._s(selected.hrs)
+                                                      )
+                                                    ])
+                                                  ]),
+                                                  _vm._v(" "),
+                                                  _c("tr", [
+                                                    _c("td", [
+                                                      _vm._v("Adviser")
+                                                    ]),
+                                                    _vm._v(" "),
+                                                    _c("td", [_vm._v(":")]),
+                                                    _vm._v(" "),
+                                                    _c("td", [
+                                                      _vm._v(
+                                                        _vm._s(selected.adv)
+                                                      )
+                                                    ])
+                                                  ])
+                                                ]
+                                          ],
+                                          2
+                                        )
                                       ]
                                     ),
                                     _vm._v(" "),
