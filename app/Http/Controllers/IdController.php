@@ -188,4 +188,14 @@ class IdController extends Controller
 
         return $ids;
     }
+
+
+    public function printed(Request $request)
+    {
+        $selected = explode(',', $request->q);
+        $ids = Id::whereIn('id', $selected)
+                ->update(['status' => 'Printed']);
+
+        return $ids;
+    }
 }

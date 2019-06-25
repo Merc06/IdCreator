@@ -2607,10 +2607,19 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     print: function print() {
+      var _this4 = this;
+
       var printContents = document.getElementById('printable').innerHTML;
       var originalContents = document.body.innerHTML;
       document.body.innerHTML = printContents;
       window.print();
+      setTimeout(function () {
+        axios.get('api/printed?q=' + _this4.checked).then(function (data) {
+          console.log(data);
+
+          _this4.loadId();
+        });
+      }, 100);
       document.body.innerHTML = originalContents;
     },
     getPhoto: function getPhoto(photo, num) {
@@ -2624,7 +2633,8 @@ __webpack_require__.r(__webpack_exports__);
     },
     checkAll: function checkAll() {
       if (this.allChecked) {
-        this.checked = [];
+        this.checked = []; // this.allChecked = !this.allChecked;
+
         console.log(this.ids.data.length);
         var i = this.ids.data.length;
 
@@ -2635,6 +2645,8 @@ __webpack_require__.r(__webpack_exports__);
         //     // console.log(this.ids[userId]);
         // });
 
+      } else {
+        this.checked = [];
       }
     },
     check: function check() {
@@ -2645,7 +2657,7 @@ __webpack_require__.r(__webpack_exports__);
       $('#modalId').modal('show');
     },
     deleteId: function deleteId(id) {
-      var _this4 = this;
+      var _this5 = this;
 
       swal.fire({
         title: 'Are you sure you want to delete this?',
@@ -2658,28 +2670,28 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (result) {
         // Send Request to server
         if (result.value) {
-          _this4.$Progress.start();
+          _this5.$Progress.start();
 
           axios["delete"]('/deleteid/' + id).then(function () {
             swal.fire('Deleted!', 'ID has been deleted.', 'success');
             Fire.$emit('afterCreateId');
 
-            _this4.$Progress.finish();
+            _this5.$Progress.finish();
           })["catch"](function () {
             swal.fire('failed!', 'There was something wrong!', 'warning');
 
-            _this4.$Progress.fail();
+            _this5.$Progress.fail();
           });
         }
       });
     }
   },
   created: function created() {
-    var _this5 = this;
+    var _this6 = this;
 
     this.loadId();
     Fire.$on('afterCreateId', function () {
-      _this5.loadId();
+      _this6.loadId();
     });
   }
 });
@@ -63625,8 +63637,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\IdCreator\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\IdCreator\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /home/marc/Documents/Project-folder/IdCreator/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /home/marc/Documents/Project-folder/IdCreator/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

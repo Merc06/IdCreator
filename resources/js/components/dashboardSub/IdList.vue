@@ -286,6 +286,14 @@
 
                 window.print();
 
+                setTimeout(() => {
+                    axios.get('api/printed?q='+this.checked).then((data) => {
+                        console.log(data);
+                        $('#printView').modal('hide');
+                        this.loadId();
+                    });
+                }, 100)
+
                 document.body.innerHTML = originalContents;
             },
 
@@ -302,6 +310,7 @@
             checkAll() {
                 if(this.allChecked) {
                     this.checked = [];
+                    // this.allChecked = !this.allChecked;
                     console.log(this.ids.data.length);
                     let i = this.ids.data.length;
                     for(let a = 0; a < i; a++) {
@@ -312,6 +321,8 @@
                     //     this.checked.push(userId.id);
                     //     // console.log(this.ids[userId]);
                     // });
+                } else {
+                    this.checked = [];
                 }
             },
 
