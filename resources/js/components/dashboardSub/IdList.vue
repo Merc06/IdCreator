@@ -150,6 +150,11 @@
                                                     <td>{{ selected.address }}</td>
                                                 </tr>
                                                 <tr>
+                                                    <td>Contact#</td>
+                                                    <td>:</td>
+                                                    <td>{{ selected.contactno }}</td>
+                                                </tr>
+                                                <tr>
                                                     <td>Birthdate</td>
                                                     <td>:</td>
                                                     <td>{{ selected.bday }}</td>
@@ -300,13 +305,15 @@
 
                 window.print();
 
-                setTimeout(() => {
-                    axios.get('api/printed?q='+this.checked).then((data) => {
-                        console.log(data);
-                        location.reload();
-                        this.loadId();
-                    });
-                }, 100)
+                axios.get('api/printed?q='+this.checked).then((data) => {
+                    console.log(data);
+                    location.reload();
+                    this.loadId();
+                });
+
+                // setTimeout(() => {
+                    
+                // }, 100)
 
                 document.body.innerHTML = originalContents;
             },

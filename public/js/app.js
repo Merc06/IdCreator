@@ -2593,6 +2593,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2652,14 +2657,14 @@ __webpack_require__.r(__webpack_exports__);
       var originalContents = document.body.innerHTML;
       document.body.innerHTML = printContents;
       window.print();
-      setTimeout(function () {
-        axios.get('api/printed?q=' + _this4.checked).then(function (data) {
-          console.log(data);
-          location.reload();
+      axios.get('api/printed?q=' + this.checked).then(function (data) {
+        console.log(data);
+        location.reload();
 
-          _this4.loadId();
-        });
-      }, 100);
+        _this4.loadId();
+      }); // setTimeout(() => {
+      // }, 100)
+
       document.body.innerHTML = originalContents;
     },
     getPhoto: function getPhoto(photo, num) {
@@ -48324,6 +48329,18 @@ var render = function() {
                                               _vm._v(" "),
                                               _c("td", [
                                                 _vm._v(_vm._s(selected.address))
+                                              ])
+                                            ]),
+                                            _vm._v(" "),
+                                            _c("tr", [
+                                              _c("td", [_vm._v("Contact#")]),
+                                              _vm._v(" "),
+                                              _c("td", [_vm._v(":")]),
+                                              _vm._v(" "),
+                                              _c("td", [
+                                                _vm._v(
+                                                  _vm._s(selected.contactno)
+                                                )
                                               ])
                                             ]),
                                             _vm._v(" "),
