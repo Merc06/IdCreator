@@ -469,6 +469,18 @@
         text-transform: uppercase;
     }
 
+    .back tr td:nth-child(1) {
+        width: 30%;
+    }
+
+    .back tr td:nth-child(2) {
+        width: 10%;
+    }
+
+    .back tr td:nth-child(3) {
+        width: 80%;
+    }
+
     .tbl-container {
         font-size: 9px;
         margin-bottom: .6rem;
