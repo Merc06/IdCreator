@@ -40,7 +40,7 @@ class CreateIdsTable extends Migration
             $table->bigInteger('advcontact')->nullable();
             
             $table->string('photo');
-            $table->string('sign');
+            $table->string('sign')->nullable();
             $table->string('qrcode');
 
             $table->string('status')->default('Pending');

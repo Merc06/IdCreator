@@ -41,6 +41,19 @@
                             <hr>
                             <div class="row">
                                 <div class="col-md-6">
+
+                                    <label v-if="editMode">ID Number:</label>
+                                    <div class="row" v-if="editMode">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <input type="text" v-model="form.empid" id="empid"
+                                                    placeholder="Last Name *" class="form-control"
+                                                    :class="{ 'is-invalid': form.errors.has('empid') }">
+                                                <has-error :form="form" field="empid"></has-error>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                     <label>Personal Info:</label>
                                     <div class="row">
 
@@ -105,6 +118,16 @@
                                                     placeholder="Birth date *" class="form-control"
                                                     :class="{ 'is-invalid': form.errors.has('bday') }">
                                                 <has-error :form="form" field="bday"></has-error>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Validity:</label>
+                                                <input type="date" v-model="form.expiration" id="expiration"
+                                                    placeholder="expiration *" class="form-control"
+                                                    :class="{ 'is-invalid': form.errors.has('expiration') }">
+                                                <has-error :form="form" field="expiration"></has-error>
                                             </div>
                                         </div>
 
@@ -273,6 +296,7 @@
                 editMode: false,
                 form: new Form({
                     id: '',
+                    empid: '',
                     type: 'employee',
                     lastName: '',
                     firstName: '',
@@ -281,6 +305,7 @@
                     contactno: '',
                     designation: '',
                     bday: '',
+                    expiration: '',
 
                     contactPerson: '',
                     cpc: '',

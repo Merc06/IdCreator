@@ -38,6 +38,7 @@
                                 <th>Name</th>
                                 <th>Type</th>
                                 <th>Status</th>
+                                <th>Expiration</th>
                                 <th>Action</th>
                             </tr>
                             <tr v-for="userId in ids.data" :key="userId.id">
@@ -53,6 +54,7 @@
                                 <td>{{ userId.lastName }}, {{ userId.firstName }} {{ userId.mi }}.</td>
                                 <td>{{ userId.type }}</td>
                                 <td>{{ userId.status }}</td>
+                                <td>{{ userId.created_at }} - {{ userId.expiration }}</td>
                                 <td>
                                     <div class="btn-group">
                                         <!-- <button type="button" class="btn btn-default btn-flat btn-sm" @click.prevent="previewId(userId.id)">
@@ -93,11 +95,11 @@
 
                     <div class="modal-body" id="printable">
 
-                        <div class="row">
-                            <div class="col-sm-3 d-flex justify-content-center"
+                        <div class="row" v-if="front">
+                            <div class="col-sm-3 d-flex align-items-center justify-content-center pr-0"
                                 v-for="selected in printViewSelected.data" :key="selected.id">
-                                <div class="card printid">
-                                    <div class="card-body p-0 front" v-if="front">
+                                <div class="card printidf">
+                                    <div class="card-body p-0 front">
 
                                         <div class="idContainer">
                                             <img :src="getPhoto(selected.photo, 1)" alt="photo" class="photo">
@@ -111,8 +113,10 @@
 											<p class="dept">
 												{{ selected.designation }}
 											</p>
-											
-											<img :src="getPhoto(selected.sign, 2)" alt="sign" class="sign">
+
+											<span v-if="selected.sign != null">
+    											<img :src="getPhoto(selected.sign, 2)" alt="sign" class="sign">
+                                            </span>
 
 											<p class="validity">
 												Date Validity: {{ selected.expiration }}
@@ -125,7 +129,17 @@
 										
                                     </div>
 
-                                    <div class="card-body p-0 back" v-else>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="row flip" v-else>
+                            <div class="col-sm-3 d-flex justify-content-center pr-0"
+                                v-for="selected in printViewSelected.data" :key="selected.id">
+                                <div class="card printidb">
+
+                                    <div class="card-body p-0 back">
                                         <h3>Personal Info</h3>
 
                                         <div class="tbl-container">
@@ -187,7 +201,7 @@
                                         <div class="tbl-container">
                                             <table class="info">
                                                 <tr>
-                                                    <td>Please Notify</td>
+                                                    <td>Notify</td>
                                                     <td>:</td>
                                                     <td>{{ selected.contactPerson }}</td>
                                                 </tr>
@@ -289,7 +303,7 @@
                 setTimeout(() => {
                     axios.get('api/printed?q='+this.checked).then((data) => {
                         console.log(data);
-                        $('#printView').modal('hide');
+                        location.reload();
                         this.loadId();
                     });
                 }, 100)
@@ -377,12 +391,27 @@
 </script>
 
 <style scoped>
-	.printid {
-		height: 324px;
-		width: 204px;
+	.printidf {
+		height: 338px;
+		width: 215px;
         -webkit-transform: scaleX(-1);
-      transform: scaleX(-1);
+        transform: scaleX(-1);
+        margin-bottom: 1.1rem !important;
+        margin-top: 1.2rem !important;
 	}
+
+    .printidb {
+        height: 338px;
+        width: 215px;
+        margin-bottom: 1.1rem !important;
+        margin-top: 1.2rem !important;
+    }
+
+    .flip {
+        -webkit-transform: scaleX(-1);
+        transform: scaleX(-1);
+    }
+
 	
     .front {
 		background: url('/img/png/bg1.png');
@@ -407,6 +436,7 @@
 		font-size: 14px;
 		font-weight: bold;
 		margin-top: 1rem;
+        text-align: center;
 	}
 	
 	.idno {

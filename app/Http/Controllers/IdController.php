@@ -24,6 +24,7 @@ class IdController extends Controller
             'cpa'           => 'required',
             'photo'         => 'required',
             // 'sign'          => 'required',
+            'expiration'          => 'required',
         ]);
 
         // DETAILS SHOW IN QRCODE
@@ -67,8 +68,8 @@ class IdController extends Controller
         $id->adv = $request->adv;
         $id->advcontact = $request->advcontact;
         // EXPIRATION
-        $expire = date('Y-m-d',strtotime(date("Y-m-d") . " + 366 day"));
-        $id->expiration = $expire;
+        // $expire = date('Y-m-d',strtotime(date("Y-m-d") . " + 366 day"));
+        $id->expiration = $request->expiration;
         // PHOTO
         $name = time() . '.' . explode('/', explode(':', substr($request->photo, 0, strpos($request->photo, ';')))[1])[1];
         \Image::make($request->photo)->save(public_path('img/photo/') . $name);
@@ -93,6 +94,7 @@ class IdController extends Controller
     public function update(Request $request)
     {
         $this->validate($request, [
+        	'empid'			=> 'required',
             'type'          => 'required',
             'lastName'      => 'required',
             'firstName'     => 'required',
@@ -106,6 +108,7 @@ class IdController extends Controller
             'cpa'           => 'required',
             'photo'         => 'required',
             // 'sign'          => 'required',
+            'expiration'    => 'required',
         ]);
 
         // UPDATE DATABASE
@@ -123,6 +126,7 @@ class IdController extends Controller
         }
         
         $id->update([
+        	'empid' => $request->empid,
         	'type' => $request->type,
             'firstName' => $request->firstName,
             'lastName' => $request->lastName,
@@ -131,6 +135,7 @@ class IdController extends Controller
             'contactno' => $request->contactno,
             'designation' => $request->designation,
             'bday' => $request->bday,
+            'expiration' => $request->expiration,
             'contactPerson' => $request->contactPerson,
             'cpc' => $request->cpc,
             'cpa' => $request->cpa,

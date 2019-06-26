@@ -2208,12 +2208,36 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       editMode: false,
       form: new Form({
         id: '',
+        empid: '',
         type: 'employee',
         lastName: '',
         firstName: '',
@@ -2222,6 +2246,7 @@ __webpack_require__.r(__webpack_exports__);
         contactno: '',
         designation: '',
         bday: '',
+        expiration: '',
         contactPerson: '',
         cpc: '',
         cpa: '',
@@ -2554,6 +2579,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2616,6 +2655,7 @@ __webpack_require__.r(__webpack_exports__);
       setTimeout(function () {
         axios.get('api/printed?q=' + _this4.checked).then(function (data) {
           console.log(data);
+          location.reload();
 
           _this4.loadId();
         });
@@ -7155,7 +7195,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.printid[data-v-59b9ee3e] {\n\t\theight: 324px;\n\t\twidth: 204px;\n      transform: scaleX(-1);\n}\n.front[data-v-59b9ee3e] {\n\t\tbackground: url('/img/png/bg1.png');\n\t\tbackground-size: cover;\n\t\tpadding-left: 2.6rem !important;\n}\n.idContainer[data-v-59b9ee3e] {\n\t\tdisplay: grid;\n\t\tjustify-items: center;\n\t\tmargin-top: 1.6rem;\n}\n.idContainer .photo[data-v-59b9ee3e] {\n\t\tborder-radius: 50%;\n\t\tborder: 1px solid black;\n\t\twidth: 80px;\n\t\theight: 80px;\n}\n.name[data-v-59b9ee3e] {\n\t\tfont-size: 14px;\n\t\tfont-weight: bold;\n\t\tmargin-top: 1rem;\n}\n.idno[data-v-59b9ee3e] {\n\t\tfont-size: 12px;\n}\n.dept[data-v-59b9ee3e] {\n\t\tfont-size: 12px;\n}\n.sign[data-v-59b9ee3e] {\n\t\theight: 30px;\n\t\twidth: 60px;\n        margin-bottom: .5rem;\n}\n.validity[data-v-59b9ee3e] {\n        margin: 0;\n        font-size: 10px;\n}\n.back[data-v-59b9ee3e] {\n        padding: 1rem !important;\n}\n.back h3[data-v-59b9ee3e] {\n        text-align: center;\n        font-size: 10px;\n        font-weight: bold;\n        text-transform: uppercase;\n}\n.tbl-container[data-v-59b9ee3e] {\n        font-size: 9px;\n        margin-bottom: .6rem;\n}\n.ppsi[data-v-59b9ee3e] {\n        font-size: 8px;\n        text-align: center;\n}\nsvg[data-v-59b9ee3e] {\n        max-width: 150px !important;\n}\n@page {\n        size: landscape;\n}\n\n", ""]);
+exports.push([module.i, "\n.printidf[data-v-59b9ee3e] {\n\t\theight: 338px;\n\t\twidth: 215px;\n        transform: scaleX(-1);\n        margin-bottom: 1.1rem !important;\n        margin-top: 1.2rem !important;\n}\n.printidb[data-v-59b9ee3e] {\n        height: 338px;\n        width: 215px;\n        margin-bottom: 1.1rem !important;\n        margin-top: 1.2rem !important;\n}\n.flip[data-v-59b9ee3e] {\n        transform: scaleX(-1);\n}\n.front[data-v-59b9ee3e] {\n\t\tbackground: url('/img/png/bg1.png');\n\t\tbackground-size: cover;\n\t\tpadding-left: 2.6rem !important;\n}\n.idContainer[data-v-59b9ee3e] {\n\t\tdisplay: grid;\n\t\tjustify-items: center;\n\t\tmargin-top: 1.6rem;\n}\n.idContainer .photo[data-v-59b9ee3e] {\n\t\tborder-radius: 50%;\n\t\tborder: 1px solid black;\n\t\twidth: 80px;\n\t\theight: 80px;\n}\n.name[data-v-59b9ee3e] {\n\t\tfont-size: 14px;\n\t\tfont-weight: bold;\n\t\tmargin-top: 1rem;\n        text-align: center;\n}\n.idno[data-v-59b9ee3e] {\n\t\tfont-size: 12px;\n}\n.dept[data-v-59b9ee3e] {\n\t\tfont-size: 12px;\n}\n.sign[data-v-59b9ee3e] {\n\t\theight: 30px;\n\t\twidth: 60px;\n        margin-bottom: .5rem;\n}\n.validity[data-v-59b9ee3e] {\n        margin: 0;\n        font-size: 10px;\n}\n.back[data-v-59b9ee3e] {\n        padding: 1rem !important;\n}\n.back h3[data-v-59b9ee3e] {\n        text-align: center;\n        font-size: 10px;\n        font-weight: bold;\n        text-transform: uppercase;\n}\n.tbl-container[data-v-59b9ee3e] {\n        font-size: 9px;\n        margin-bottom: .6rem;\n}\n.ppsi[data-v-59b9ee3e] {\n        font-size: 8px;\n        text-align: center;\n}\nsvg[data-v-59b9ee3e] {\n        max-width: 150px !important;\n}\n@page {\n        size: landscape;\n}\n\n", ""]);
 
 // exports
 
@@ -46661,6 +46701,62 @@ var render = function() {
                     _vm._v(" "),
                     _c("div", { staticClass: "row" }, [
                       _c("div", { staticClass: "col-md-6" }, [
+                        _vm.editMode
+                          ? _c("label", [_vm._v("ID Number:")])
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _vm.editMode
+                          ? _c("div", { staticClass: "row" }, [
+                              _c("div", { staticClass: "col-md-4" }, [
+                                _c(
+                                  "div",
+                                  { staticClass: "form-group" },
+                                  [
+                                    _c("input", {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: _vm.form.empid,
+                                          expression: "form.empid"
+                                        }
+                                      ],
+                                      staticClass: "form-control",
+                                      class: {
+                                        "is-invalid": _vm.form.errors.has(
+                                          "empid"
+                                        )
+                                      },
+                                      attrs: {
+                                        type: "text",
+                                        id: "empid",
+                                        placeholder: "Last Name *"
+                                      },
+                                      domProps: { value: _vm.form.empid },
+                                      on: {
+                                        input: function($event) {
+                                          if ($event.target.composing) {
+                                            return
+                                          }
+                                          _vm.$set(
+                                            _vm.form,
+                                            "empid",
+                                            $event.target.value
+                                          )
+                                        }
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("has-error", {
+                                      attrs: { form: _vm.form, field: "empid" }
+                                    })
+                                  ],
+                                  1
+                                )
+                              ])
+                            ])
+                          : _vm._e(),
+                        _vm._v(" "),
                         _c("label", [_vm._v("Personal Info:")]),
                         _vm._v(" "),
                         _c("div", { staticClass: "row" }, [
@@ -46993,6 +47089,56 @@ var render = function() {
                                 _vm._v(" "),
                                 _c("has-error", {
                                   attrs: { form: _vm.form, field: "bday" }
+                                })
+                              ],
+                              1
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-md-6" }, [
+                            _c(
+                              "div",
+                              { staticClass: "form-group" },
+                              [
+                                _c("label", [_vm._v("Validity:")]),
+                                _vm._v(" "),
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.form.expiration,
+                                      expression: "form.expiration"
+                                    }
+                                  ],
+                                  staticClass: "form-control",
+                                  class: {
+                                    "is-invalid": _vm.form.errors.has(
+                                      "expiration"
+                                    )
+                                  },
+                                  attrs: {
+                                    type: "date",
+                                    id: "expiration",
+                                    placeholder: "expiration *"
+                                  },
+                                  domProps: { value: _vm.form.expiration },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.form,
+                                        "expiration",
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("has-error", {
+                                  attrs: { form: _vm.form, field: "expiration" }
                                 })
                               ],
                               1
@@ -47864,6 +48010,8 @@ var render = function() {
                   _vm._v(" "),
                   _c("th", [_vm._v("Status")]),
                   _vm._v(" "),
+                  _c("th", [_vm._v("Expiration")]),
+                  _vm._v(" "),
                   _c("th", [_vm._v("Action")])
                 ]),
                 _vm._v(" "),
@@ -47935,6 +48083,14 @@ var render = function() {
                     _c("td", [_vm._v(_vm._s(userId.type))]),
                     _vm._v(" "),
                     _c("td", [_vm._v(_vm._s(userId.status))]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v(
+                        _vm._s(userId.created_at) +
+                          " - " +
+                          _vm._s(userId.expiration)
+                      )
+                    ]),
                     _vm._v(" "),
                     _c("td", [
                       _c("div", { staticClass: "btn-group" }, [
@@ -48027,20 +48183,21 @@ var render = function() {
                 "div",
                 { staticClass: "modal-body", attrs: { id: "printable" } },
                 [
-                  _c(
-                    "div",
-                    { staticClass: "row" },
-                    _vm._l(_vm.printViewSelected.data, function(selected) {
-                      return _c(
+                  _vm.front
+                    ? _c(
                         "div",
-                        {
-                          key: selected.id,
-                          staticClass: "col-sm-3 d-flex justify-content-center"
-                        },
-                        [
-                          _c("div", { staticClass: "card printid" }, [
-                            _vm.front
-                              ? _c(
+                        { staticClass: "row" },
+                        _vm._l(_vm.printViewSelected.data, function(selected) {
+                          return _c(
+                            "div",
+                            {
+                              key: selected.id,
+                              staticClass:
+                                "col-sm-3 d-flex align-items-center justify-content-center pr-0"
+                            },
+                            [
+                              _c("div", { staticClass: "card printidf" }, [
+                                _c(
                                   "div",
                                   { staticClass: "card-body p-0 front" },
                                   [
@@ -48083,13 +48240,20 @@ var render = function() {
                                           )
                                         ]),
                                         _vm._v(" "),
-                                        _c("img", {
-                                          staticClass: "sign",
-                                          attrs: {
-                                            src: _vm.getPhoto(selected.sign, 2),
-                                            alt: "sign"
-                                          }
-                                        }),
+                                        selected.sign != null
+                                          ? _c("span", [
+                                              _c("img", {
+                                                staticClass: "sign",
+                                                attrs: {
+                                                  src: _vm.getPhoto(
+                                                    selected.sign,
+                                                    2
+                                                  ),
+                                                  alt: "sign"
+                                                }
+                                              })
+                                            ])
+                                          : _vm._e(),
                                         _vm._v(" "),
                                         _c("p", { staticClass: "validity" }, [
                                           _vm._v(
@@ -48120,7 +48284,26 @@ var render = function() {
                                     )
                                   ]
                                 )
-                              : _c(
+                              ])
+                            ]
+                          )
+                        }),
+                        0
+                      )
+                    : _c(
+                        "div",
+                        { staticClass: "row flip" },
+                        _vm._l(_vm.printViewSelected.data, function(selected) {
+                          return _c(
+                            "div",
+                            {
+                              key: selected.id,
+                              staticClass:
+                                "col-sm-3 d-flex justify-content-center pr-0"
+                            },
+                            [
+                              _c("div", { staticClass: "card printidb" }, [
+                                _c(
                                   "div",
                                   { staticClass: "card-body p-0 back" },
                                   [
@@ -48265,7 +48448,7 @@ var render = function() {
                                       [
                                         _c("table", { staticClass: "info" }, [
                                           _c("tr", [
-                                            _c("td", [_vm._v("Please Notify")]),
+                                            _c("td", [_vm._v("Notify")]),
                                             _vm._v(" "),
                                             _c("td", [_vm._v(":")]),
                                             _vm._v(" "),
@@ -48302,12 +48485,12 @@ var render = function() {
                                     _vm._m(1, true)
                                   ]
                                 )
-                          ])
-                        ]
+                              ])
+                            ]
+                          )
+                        }),
+                        0
                       )
-                    }),
-                    0
-                  )
                 ]
               )
             ])
@@ -63637,8 +63820,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/marc/Documents/Project-folder/IdCreator/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /home/marc/Documents/Project-folder/IdCreator/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\IdCreator\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\IdCreator\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
