@@ -2597,6 +2597,7 @@ __webpack_require__.r(__webpack_exports__);
       setTimeout(function () {
         axios.get('api/printed?q=' + _this4.checked).then(function (data) {
           console.log(data);
+          $('#printView').modal('hide');
 
           _this4.loadId();
         });
@@ -7136,7 +7137,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.printid[data-v-59b9ee3e] {\n\t\theight: 324px;\n\t\twidth: 204px;\n      transform: scaleX(-1);\n}\n.front[data-v-59b9ee3e] {\n\t\tbackground: url('/img/png/bg1.png');\n\t\tbackground-size: cover;\n\t\tpadding-left: 2.6rem !important;\n}\n.idContainer[data-v-59b9ee3e] {\n\t\tdisplay: grid;\n\t\tjustify-items: center;\n\t\tmargin-top: 1.6rem;\n}\n.idContainer .photo[data-v-59b9ee3e] {\n\t\tborder-radius: 50%;\n\t\tborder: 1px solid black;\n\t\twidth: 80px;\n\t\theight: 80px;\n}\n.name[data-v-59b9ee3e] {\n\t\tfont-size: 14px;\n\t\tfont-weight: bold;\n\t\tmargin-top: 1rem;\n}\n.idno[data-v-59b9ee3e] {\n\t\tfont-size: 12px;\n}\n.dept[data-v-59b9ee3e] {\n\t\tfont-size: 12px;\n}\n.sign[data-v-59b9ee3e] {\n\t\theight: 30px;\n\t\twidth: 60px;\n        margin-bottom: .5rem;\n}\n.validity[data-v-59b9ee3e] {\n        margin: 0;\n        font-size: 10px;\n}\n.back[data-v-59b9ee3e] {\n        padding: 1rem !important;\n}\n.back h3[data-v-59b9ee3e] {\n        text-align: center;\n        font-size: 10px;\n        font-weight: bold;\n        text-transform: uppercase;\n}\n.tbl-container[data-v-59b9ee3e] {\n        font-size: 9px;\n        margin-bottom: .6rem;\n}\n.ppsi[data-v-59b9ee3e] {\n        font-size: 8px;\n        text-align: center;\n}\n@page {\n        size: landscape;\n}\n\n", ""]);
+exports.push([module.i, "\n.printid[data-v-59b9ee3e] {\n\t\theight: 324px;\n\t\twidth: 204px;\n      transform: scaleX(-1);\n}\n.front[data-v-59b9ee3e] {\n\t\tbackground: url('/img/png/bg1.png');\n\t\tbackground-size: cover;\n\t\tpadding-left: 2.6rem !important;\n}\n.idContainer[data-v-59b9ee3e] {\n\t\tdisplay: grid;\n\t\tjustify-items: center;\n\t\tmargin-top: 1.6rem;\n}\n.idContainer .photo[data-v-59b9ee3e] {\n\t\tborder-radius: 50%;\n\t\tborder: 1px solid black;\n\t\twidth: 80px;\n\t\theight: 80px;\n}\n.name[data-v-59b9ee3e] {\n\t\tfont-size: 14px;\n\t\tfont-weight: bold;\n\t\tmargin-top: 1rem;\n}\n.idno[data-v-59b9ee3e] {\n\t\tfont-size: 12px;\n}\n.dept[data-v-59b9ee3e] {\n\t\tfont-size: 12px;\n}\n.sign[data-v-59b9ee3e] {\n\t\theight: 30px;\n\t\twidth: 60px;\n        margin-bottom: .5rem;\n}\n.validity[data-v-59b9ee3e] {\n        margin: 0;\n        font-size: 10px;\n}\n.back[data-v-59b9ee3e] {\n        padding: 1rem !important;\n}\n.back h3[data-v-59b9ee3e] {\n        text-align: center;\n        font-size: 10px;\n        font-weight: bold;\n        text-transform: uppercase;\n}\n.back tr td[data-v-59b9ee3e]:nth-child(1) {\n        width: 30%;\n}\n.back tr td[data-v-59b9ee3e]:nth-child(2) {\n        width: 10%;\n}\n.back tr td[data-v-59b9ee3e]:nth-child(3) {\n        width: 80%;\n}\n.tbl-container[data-v-59b9ee3e] {\n        font-size: 9px;\n        margin-bottom: .6rem;\n}\n.ppsi[data-v-59b9ee3e] {\n        font-size: 8px;\n        text-align: center;\n}\n@page {\n        size: landscape;\n}\n\n", ""]);
 
 // exports
 
@@ -48181,7 +48182,7 @@ var render = function() {
                                       [
                                         _c("table", { staticClass: "info" }, [
                                           _c("tr", [
-                                            _c("td", [_vm._v("Please Notify")]),
+                                            _c("td", [_vm._v("Notify")]),
                                             _vm._v(" "),
                                             _c("td", [_vm._v(":")]),
                                             _vm._v(" "),

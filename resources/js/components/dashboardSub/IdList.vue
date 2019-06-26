@@ -168,7 +168,7 @@
                                         <div class="tbl-container">
                                             <table class="info">
                                                 <tr>
-                                                    <td>Please Notify</td>
+                                                    <td>Notify</td>
                                                     <td>:</td>
                                                     <td>{{ selected.contactPerson }}</td>
                                                 </tr>
@@ -418,6 +418,18 @@
         font-size: 10px;
         font-weight: bold;
         text-transform: uppercase;
+    }
+
+    .back tr td:nth-child(1) {
+        width: 30%;
+    }
+
+    .back tr td:nth-child(2) {
+        width: 10%;
+    }
+
+    .back tr td:nth-child(3) {
+        width: 80%;
     }
 
     .tbl-container {
