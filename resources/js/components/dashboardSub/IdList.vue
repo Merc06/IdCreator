@@ -448,15 +448,17 @@
 	
 	.idno {
 		font-size: 12px;
+        margin-bottom: .5rem;
 	}
 	
 	.dept {
 		font-size: 12px;
+        margin-bottom: .5rem;
 	}
 	
 	.sign {
-		height: 30px;
-		width: 60px;
+		height: 50px;
+		width: 80px;
         margin-bottom: .5rem;
 	}
 
